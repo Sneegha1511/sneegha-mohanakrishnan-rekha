@@ -616,6 +616,13 @@
   .card-title { font-family: 'Orbitron', monospace; font-size: 1.05rem; color: var(--white); font-weight: 700; margin-bottom: 10px; }
   .card-desc { color: var(--grey); font-size: 0.85rem; line-height: 1.8; margin-bottom: 16px; }
 
+  .terminal-card .card-bottom {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 16px;
+  }
+
   .card-tech { display: flex; flex-wrap: wrap; gap: 8px; }
   .tech-pill {
     font-size: 0.7rem;
@@ -624,6 +631,41 @@
     background: rgba(0, 170, 255, 0.08);
     border: 1px solid rgba(0, 170, 255, 0.25);
     color: var(--green);
+  }
+
+  .card-link-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    width: fit-content;
+    gap: 8px;
+    padding: 6px 14px;
+    background: rgba(0, 170, 255, 0.06);
+    border: 1px solid rgba(0, 170, 255, 0.35);
+    border-radius: 2px;
+    color: var(--cyan);
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 2px;
+    text-decoration: none;
+    transition: all 0.25s ease;
+  }
+
+  .card-link-btn:hover {
+    background: rgba(255, 45, 138, 0.15);
+    border-color: var(--cyan);
+    color: #ffffff;
+    box-shadow: 0 0 12px rgba(255, 45, 138, 0.35);
+    transform: translateY(-2px);
+  }
+
+  .card-link-btn .btn-arrow {
+    font-size: 0.85rem;
+    transition: transform 0.2s ease;
+  }
+
+  .card-link-btn:hover .btn-arrow {
+    transform: translate(2px, -2px);
   }
 
   /* EDUCATION */
@@ -936,14 +978,39 @@
   <div class="cards-grid">
     <div class="terminal-card">
       <div class="card-top">
+        <div class="card-tag">// NETWORK FORENSICS &amp; THREAT ANALYSIS</div>
+        <div class="card-title">Malware Traffic Analysis &amp; Incident Response Lab</div>
+        <div class="card-desc">
+          Analyzed real-world malicious PCAP traffic using Wireshark to isolate infected hosts, identify malware families, trace attacker footprints, extract actionable IOCs, and reconstruct forensic attack timelines for formal incident reports.
+        </div>
+      </div>
+      <div class="card-bottom">
+        <div class="card-tech">
+          <span class="tech-pill">Wireshark</span>
+          <span class="tech-pill">Network Security</span>
+          <span class="tech-pill">Malware Analysis</span>
+          <span class="tech-pill">Incident Response</span>
+          <span class="tech-pill">Traffic Analysis</span>
+        </div>
+        <a href="https://github.com/Sneegha1511/Malware-Traffic-Analysis-and-Incident-Response-Lab" target="_blank" class="card-link-btn">
+          <span>VIEW REPO</span>
+          <span class="btn-arrow">↗</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="terminal-card">
+      <div class="card-top">
         <div class="card-tag">// Cybersecurity &amp; AI</div>
         <div class="card-title">AI Security Proxy</div>
         <div class="card-desc">An inline defense proxy for LLM architectures designed to intercept, analyze, and neutralize prompt injection, Chain-of-Thought leakage, and sensitive API credential exposure.</div>
       </div>
-      <div class="card-tech">
-        <span class="tech-pill">Python</span>
-        <span class="tech-pill">LLM Security</span>
-        <span class="tech-pill">OWASP</span>
+      <div class="card-bottom">
+        <div class="card-tech">
+          <span class="tech-pill">Python</span>
+          <span class="tech-pill">LLM Security</span>
+          <span class="tech-pill">OWASP</span>
+        </div>
       </div>
     </div>
 
@@ -953,10 +1020,12 @@
         <div class="card-title">Linux Auth Attack Detection</div>
         <div class="card-desc">Automated log monitor tracking failed authentication bursts, unauthorized privilege escalations, and brute force vectors across Linux systems.</div>
       </div>
-      <div class="card-tech">
-        <span class="tech-pill">Bash</span>
-        <span class="tech-pill">Linux</span>
-        <span class="tech-pill">Regex</span>
+      <div class="card-bottom">
+        <div class="card-tech">
+          <span class="tech-pill">Bash</span>
+          <span class="tech-pill">Linux</span>
+          <span class="tech-pill">Regex</span>
+        </div>
       </div>
     </div>
 
@@ -966,10 +1035,12 @@
         <div class="card-title">SPISE-CTF Suspicious DNS</div>
         <div class="card-desc">Forensics and packet capture challenge centered around identifying exfiltration payloads disguised inside anomalous DNS queries.</div>
       </div>
-      <div class="card-tech">
-        <span class="tech-pill">Wireshark</span>
-        <span class="tech-pill">PCAP</span>
-        <span class="tech-pill">Network Security</span>
+      <div class="card-bottom">
+        <div class="card-tech">
+          <span class="tech-pill">Wireshark</span>
+          <span class="tech-pill">PCAP</span>
+          <span class="tech-pill">Network Security</span>
+        </div>
       </div>
     </div>
   </div>
@@ -990,9 +1061,11 @@
         <div class="card-title">Secure Multipath Routing &amp; Adversarial Nodes</div>
         <div class="card-desc">Investigating cryptographic verification and path redundancy models to mitigate probabilistic node corruption in distributed systems.</div>
       </div>
-      <div class="card-tech">
-        <span class="tech-pill">Routing Protocols</span>
-        <span class="tech-pill">Distributed Networks</span>
+      <div class="card-bottom">
+        <div class="card-tech">
+          <span class="tech-pill">Routing Protocols</span>
+          <span class="tech-pill">Distributed Networks</span>
+        </div>
       </div>
     </div>
 
@@ -1002,9 +1075,11 @@
         <div class="card-title">Quantum Key Distribution Architectures</div>
         <div class="card-desc">Analyzing photon-level polarization states and eavesdropping detection mechanisms across emerging post-quantum cryptographic primitives.</div>
       </div>
-      <div class="card-tech">
-        <span class="tech-pill">Cryptography</span>
-        <span class="tech-pill">QKD</span>
+      <div class="card-bottom">
+        <div class="card-tech">
+          <span class="tech-pill">Cryptography</span>
+          <span class="tech-pill">QKD</span>
+        </div>
       </div>
     </div>
   </div>
