@@ -93,11 +93,19 @@
     position: relative;
     z-index: 10;
     min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    align-items: center;
+    gap: 48px;
+    padding: 120px 80px 80px;
+    max-width: 1300px;
+    margin: 0 auto;
+  }
+
+  .hero-left {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 120px 80px 80px;
-    max-width: 1200px;
   }
 
   .hero-tag {
@@ -113,7 +121,7 @@
   /* CYBER CHROMATIC SLICE GLITCH */
   .hero-name {
     font-family: 'Orbitron', monospace;
-    font-size: clamp(3.2rem, 7.5vw, 5.8rem);
+    font-size: clamp(2.8rem, 6vw, 5.2rem);
     font-weight: 900;
     line-height: 1.1;
     letter-spacing: 3px;
@@ -213,26 +221,26 @@
   }
 
   .hero-title {
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     color: var(--grey);
     letter-spacing: 3px;
     margin-top: 20px;
-    margin-bottom: 40px;
+    margin-bottom: 34px;
     text-transform: uppercase;
     opacity: 0;
     animation: fadeInUp 0.8s 0.7s forwards;
   }
-  .hero-title .sep { color: var(--green); margin: 0 10px; }
+  .hero-title .sep { color: var(--green); margin: 0 8px; }
 
   /* TERMINAL */
   .terminal {
     background: rgba(0,5,15,0.92);
     border: 1px solid rgba(0,170,255,0.35);
     border-radius: 4px;
-    padding: 24px;
-    max-width: 580px;
-    font-size: 0.85rem;
-    line-height: 1.8;
+    padding: 22px;
+    max-width: 540px;
+    font-size: 0.82rem;
+    line-height: 1.75;
     position: relative;
     overflow: hidden;
     opacity: 0;
@@ -279,6 +287,137 @@
     vertical-align: middle;
     margin-left: 2px;
   }
+
+  /* CRYPTOGRAPHIC PROFILE HUD (HERO RIGHT) */
+  .hero-right {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    animation: fadeInUp 0.9s 0.6s forwards;
+  }
+
+  .crypto-card-container {
+    position: relative;
+    width: 100%;
+    max-width: 360px;
+    background: rgba(0, 8, 20, 0.85);
+    border: 1px solid rgba(0, 170, 255, 0.3);
+    border-radius: 6px;
+    padding: 16px;
+    box-shadow: 0 0 30px rgba(0, 170, 255, 0.15), inset 0 0 25px rgba(0, 0, 0, 0.8);
+  }
+
+  /* Target Reticle Brackets */
+  .bracket-tl, .bracket-tr, .bracket-bl, .bracket-br {
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    border-color: var(--green);
+    pointer-events: none;
+  }
+  .bracket-tl { top: -2px; left: -2px; border-top: 2px solid; border-left: 2px solid; }
+  .bracket-tr { top: -2px; right: -2px; border-top: 2px solid; border-right: 2px solid; }
+  .bracket-bl { bottom: -2px; left: -2px; border-bottom: 2px solid; border-left: 2px solid; }
+  .bracket-br { bottom: -2px; right: -2px; border-bottom: 2px solid; border-right: 2px solid; }
+
+  .crypto-hud-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.65rem;
+    letter-spacing: 2px;
+    color: var(--cyan);
+    margin-bottom: 12px;
+    text-transform: uppercase;
+  }
+
+  .crypto-pulse-dot {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #00ffaa;
+    box-shadow: 0 0 8px #00ffaa;
+    margin-right: 5px;
+    animation: blink 1.2s infinite;
+  }
+
+  .crypto-img-frame {
+    position: relative;
+    width: 100%;
+    height: 380px;
+    border: 1px solid rgba(0, 170, 255, 0.4);
+    border-radius: 4px;
+    overflow: hidden;
+    background: #00050d;
+  }
+
+  .crypto-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    filter: contrast(1.08) brightness(0.95) hue-rotate(185deg) saturate(0.85);
+    transition: filter 0.3s ease;
+  }
+
+  .crypto-card-container:hover .crypto-photo {
+    filter: contrast(1.05) brightness(1) saturate(1);
+  }
+
+  /* Scanline Overlay */
+  .crypto-img-frame::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(0, 170, 255, 0.12) 3px, rgba(0, 170, 255, 0.12) 6px);
+    pointer-events: none;
+    z-index: 2;
+  }
+
+  /* Moving Laser Scanner */
+  .crypto-scan-line {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(to right, transparent, #00ffff, #ffffff, #00ffff, transparent);
+    box-shadow: 0 0 12px #00ffff, 0 0 20px rgba(0, 255, 255, 0.8);
+    z-index: 3;
+    pointer-events: none;
+    animation: laserScan 3.5s infinite ease-in-out;
+  }
+
+  @keyframes laserScan {
+    0% { top: 0%; opacity: 0; }
+    10% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { top: 99%; opacity: 0; }
+  }
+
+  /* Running Cryptographic Data Stream */
+  .crypto-stream-box {
+    margin-top: 14px;
+    background: rgba(0, 3, 10, 0.95);
+    border: 1px solid rgba(0, 170, 255, 0.2);
+    border-radius: 3px;
+    padding: 8px 12px;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.68rem;
+    line-height: 1.5;
+    color: var(--green);
+    overflow: hidden;
+  }
+
+  .crypto-row-data {
+    display: flex;
+    justify-content: space-between;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+
+  .crypto-row-data span:first-child { color: var(--grey); }
+  .crypto-row-data span:last-child { color: var(--cyan); letter-spacing: 1px; }
 
   /* SECTIONS */
   section {
@@ -564,10 +703,26 @@
 
   .divider { border: none; border-top: 1px solid rgba(0,170,255,0.09); margin: 0; }
 
+  @media (max-width: 992px) {
+    #hero {
+      grid-template-columns: 1fr;
+      padding-top: 110px;
+      gap: 40px;
+    }
+    .hero-right {
+      order: -1; /* Display identity visual above terminal on smaller viewports */
+    }
+    .crypto-card-container {
+      max-width: 320px;
+    }
+    .crypto-img-frame {
+      height: 330px;
+    }
+  }
+
   @media (max-width: 768px) {
     nav { padding: 14px 20px; justify-content: center; }
     nav ul { gap: 14px; flex-wrap: wrap; justify-content: center; }
-    #hero { padding: 100px 24px 60px; }
     section { padding: 60px 24px; }
     .about-grid, .contact-wrapper, .edu-grid { grid-template-columns: 1fr; }
     .skills-wrapper { padding: 20px 14px; }
@@ -592,23 +747,63 @@
   </ul>
 </nav>
 
-<!-- HERO -->
+<!-- HERO (TWO COLUMN GRID) -->
 <div id="hero">
-  <p class="hero-tag">// CS Student · Cybersecurity &amp; AI Enthusiast · University of Calgary</p>
-  <h1 class="hero-name" data-text="Sneegha">Sneegha</h1>
-  <p class="hero-pronouns">she / her</p>
-  <p class="hero-title">
-    Cybersecurity <span class="sep">|</span>
-    AI <span class="sep">|</span>
-    Data <span class="sep">|</span>
-    Computer Science <span class="sep">|</span>
-    Problem Solver
-  </p>
+  <!-- LEFT COLUMN: TITLE & TERMINAL -->
+  <div class="hero-left">
+    <p class="hero-tag">// CS Student · Cybersecurity &amp; AI Enthusiast · University of Calgary</p>
+    <h1 class="hero-name" data-text="Sneegha">Sneegha</h1>
+    <p class="hero-pronouns">she / her</p>
+    <p class="hero-title">
+      Cybersecurity <span class="sep">|</span>
+      AI <span class="sep">|</span>
+      Data <span class="sep">|</span>
+      Computer Science <span class="sep">|</span>
+      Problem Solver
+    </p>
 
-  <div class="terminal">
-    <div class="terminal-dots"><span></span><span></span><span></span></div>
-    <span class="terminal-title">bash — 80x24</span>
-    <div class="terminal-body" id="terminal-body"></div>
+    <div class="terminal">
+      <div class="terminal-dots"><span></span><span></span><span></span></div>
+      <span class="terminal-title">bash — 80x24</span>
+      <div class="terminal-body" id="terminal-body"></div>
+    </div>
+  </div>
+
+  <!-- RIGHT COLUMN: CRYPTOGRAPHIC BIOMETRIC IDENTITY HUD -->
+  <div class="hero-right">
+    <div class="crypto-card-container">
+      <div class="bracket-tl"></div>
+      <div class="bracket-tr"></div>
+      <div class="bracket-bl"></div>
+      <div class="bracket-br"></div>
+
+      <div class="crypto-hud-header">
+        <span><span class="crypto-pulse-dot"></span>BIOMETRIC_RECON.sh</span>
+        <span id="recon-coords">LOC: 51.07°N, 114.13°W</span>
+      </div>
+
+      <div class="crypto-img-frame">
+        <div class="crypto-scan-line"></div>
+        <!-- Load your photo (placed in same repo as profile.jpg) -->
+        <img src="profile.jpg" alt="Sneegha - Cyber Recon" class="crypto-photo" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=800&q=80';" />
+      </div>
+
+      <!-- Live Streaming Hex/Matrix Numbers -->
+      <div class="crypto-stream-box">
+        <div class="crypto-row-data">
+          <span>SHA-256:</span>
+          <span id="crypto-hash-stream">7f83b165...e9b1</span>
+        </div>
+        <div class="crypto-row-data">
+          <span>SEC_KEY:</span>
+          <span id="crypto-num-stream">0xDEAD // 10101100</span>
+        </div>
+        <div class="crypto-row-data">
+          <span>CIPHER:</span>
+          <span style="color:#00ffaa;">AES-256-GCM [ACTIVE]</span>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -1014,6 +1209,24 @@ function typeTerminal() {
   }
 }
 setTimeout(typeTerminal, 1000);
+
+// RUNNING CRYPTO DATA HUD ENGINE
+function updateCryptoHUD() {
+  const hashEl = document.getElementById('crypto-hash-stream');
+  const numEl = document.getElementById('crypto-num-stream');
+
+  const hexChars = '0123456789abcdef';
+  let randHash = '';
+  for(let i = 0; i < 8; i++) randHash += hexChars[Math.floor(Math.random() * 16)];
+  randHash += '...' + hexChars[Math.floor(Math.random() * 16)] + hexChars[Math.floor(Math.random() * 16)];
+
+  const binary = Math.floor(Math.random() * 255).toString(2).padStart(8, '0');
+  const hexAddress = '0x' + Math.floor(Math.random() * 0xFFFF).toString(16).toUpperCase().padStart(4, '0');
+
+  if (hashEl) hashEl.textContent = randHash;
+  if (numEl) numEl.textContent = `${hexAddress} // ${binary}`;
+}
+setInterval(updateCryptoHUD, 140);
 
 function handleSubmit(e) {
   e.preventDefault();
