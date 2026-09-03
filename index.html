@@ -94,7 +94,7 @@
     z-index: 10;
     min-height: 100vh;
     display: grid;
-    grid-template-columns: 1.1fr 0.9fr;
+    grid-template-columns: 1.15fr 0.85fr;
     align-items: center;
     gap: 48px;
     padding: 120px 80px 80px;
@@ -288,7 +288,7 @@
     margin-left: 2px;
   }
 
-  /* CYBER CRYPTOGRAPHIC TRACING WINDOW */
+  /* CYBER WINDOW HUD */
   .hero-right {
     display: flex;
     justify-content: center;
@@ -299,8 +299,8 @@
 
   .cyber-window-frame {
     width: 100%;
-    max-width: 420px;
-    background: rgba(0, 4, 12, 0.95);
+    max-width: 500px;
+    background: rgba(0, 4, 12, 0.94);
     border: 1px solid rgba(0, 170, 255, 0.35);
     border-radius: 8px;
     overflow: hidden;
@@ -311,7 +311,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 12px 18px;
+    padding: 10px 16px;
     background: rgba(0, 15, 30, 0.95);
     border-bottom: 1px solid rgba(0, 170, 255, 0.25);
   }
@@ -323,20 +323,24 @@
   .window-dots span:nth-child(3) { background: #2ed573; }
 
   .window-path {
-    font-size: 0.72rem;
+    font-size: 0.7rem;
     color: var(--grey);
     letter-spacing: 2px;
   }
 
   .cyber-hud-body {
+    display: grid;
+    grid-template-columns: 1fr 140px;
+    gap: 16px;
     padding: 16px;
-    background: rgba(0, 5, 15, 0.85);
+    background: rgba(0, 5, 15, 0.7);
   }
 
+  /* PORTRAIT BOX WITH CRYSTAL CLEAR IMAGE + FINE CODE TRACE */
   .crypto-portrait-box {
     position: relative;
     width: 100%;
-    height: 440px;
+    height: 340px;
     border: 1px solid rgba(0, 170, 255, 0.4);
     border-radius: 4px;
     overflow: hidden;
@@ -345,11 +349,25 @@
     -webkit-user-select: none;
   }
 
+  /* Clear original photo */
+  .crypto-photo-art {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    z-index: 1;
+    filter: contrast(1.04) brightness(0.98);
+  }
+
+  /* Fine holographic crypto-tracing canvas */
   #ascii-portrait-canvas {
-    width: 100%;
-    height: 100%;
-    display: block;
-    background: #00050d;
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: 2;
+    pointer-events: none;
+    mix-blend-mode: screen;
   }
 
   .crypto-scan-line {
@@ -357,10 +375,10 @@
     top: 0; left: 0; right: 0;
     height: 2px;
     background: linear-gradient(to right, transparent, #00ffff, #ffffff, #ff2d8a, transparent);
-    box-shadow: 0 0 12px #00ffff;
+    box-shadow: 0 0 10px #00ffff;
     z-index: 4;
     pointer-events: none;
-    animation: laserScan 2.4s infinite ease-in-out;
+    animation: laserScan 2.8s infinite ease-in-out;
   }
 
   @keyframes laserScan {
@@ -368,6 +386,43 @@
     15% { opacity: 1; }
     85% { opacity: 1; }
     100% { top: 98%; opacity: 0; }
+  }
+
+  /* TELEMETRY SIDEBAR SPECS */
+  .hud-sidebar-specs {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    font-size: 0.65rem;
+    line-height: 1.4;
+    border-left: 1px dashed rgba(0, 170, 255, 0.25);
+    padding-left: 12px;
+  }
+
+  .spec-entry {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .spec-k {
+    color: var(--grey);
+    letter-spacing: 1.5px;
+    font-size: 0.58rem;
+  }
+
+  .spec-v {
+    color: #e0f0ff;
+    font-family: 'Share Tech Mono', monospace;
+    word-break: break-all;
+  }
+
+  .spec-v.highlight { color: #00aaff; }
+  .spec-v.ok { color: #2ed573; }
+  .spec-v.stream-code {
+    color: var(--cyan);
+    font-family: 'VT323', monospace;
+    font-size: 0.9rem;
   }
 
   .hud-footer-bar {
@@ -675,10 +730,10 @@
       order: -1;
     }
     .cyber-window-frame {
-      max-width: 380px;
+      max-width: 440px;
     }
     .crypto-portrait-box {
-      height: 400px;
+      height: 320px;
     }
   }
 
@@ -740,13 +795,41 @@
       <div class="cyber-hud-body">
         <div class="crypto-portrait-box" oncontextmenu="return false;">
           <div class="crypto-scan-line"></div>
+          <img src="profile.png" id="ref-photo" alt="Sneegha" class="crypto-photo-art" />
           <canvas id="ascii-portrait-canvas"></canvas>
+        </div>
+
+        <div class="hud-sidebar-specs">
+          <div class="spec-entry">
+            <span class="spec-k">SUBJECT:</span>
+            <span class="spec-v">Sneegha M. Rekha</span>
+          </div>
+          <div class="spec-entry">
+            <span class="spec-k">ROLE:</span>
+            <span class="spec-v highlight">InfoSec // CS Hons</span>
+          </div>
+          <div class="spec-entry">
+            <span class="spec-k">STATUS:</span>
+            <span class="spec-v ok">ONLINE 🟢</span>
+          </div>
+          <div class="spec-entry">
+            <span class="spec-k">CIPHER:</span>
+            <span class="spec-v">AES-256-GCM</span>
+          </div>
+          <div class="spec-entry">
+            <span class="spec-k">KEY_STREAM:</span>
+            <span class="spec-v stream-code" id="hud-live-key">0xD2...85</span>
+          </div>
+          <div class="spec-entry">
+            <span class="spec-k">HASH:</span>
+            <span class="spec-v stream-code" id="hud-live-hash">0x20B224</span>
+          </div>
         </div>
       </div>
 
       <div class="hud-footer-bar">
         <span>SECURITY PROTOCOL: ACTIVE</span>
-        <span id="hud-entropy">ENTROPY: 99.85%</span>
+        <span id="hud-entropy">ENTROPY: 99.82%</span>
       </div>
     </div>
   </div>
@@ -1143,87 +1226,64 @@ function typeTerminal() {
 }
 setTimeout(typeTerminal, 1000);
 
-// LINE-BY-LINE COLOR-TRACED CRYPTOGRAPHIC ASCII PORTRAIT GENERATOR
+// FINE-GRAINED CRYPTOGRAPHIC HORIZONTAL SCANLINE TRACER
 const pCanvas = document.getElementById('ascii-portrait-canvas');
 const pCtx = pCanvas.getContext('2d');
-const img = new Image();
-img.src = 'profile.png';
-
-let imgLoaded = false;
-img.onload = () => {
-  imgLoaded = true;
-  resizeAscii();
-};
-
-const asciiChars = '0123456789ABCDEF@#%*+=-:. ';
-const charLen = asciiChars.length;
-const stepX = 7; 
-const stepY = 11; 
-let currentScanY = 0;
-let offCanvas, offCtx;
 
 function resizeAscii() {
   const rect = pCanvas.parentElement.getBoundingClientRect();
   pCanvas.width = rect.width;
   pCanvas.height = rect.height;
-
-  offCanvas = document.createElement('canvas');
-  offCanvas.width = pCanvas.width;
-  offCanvas.height = pCanvas.height;
-  offCtx = offCanvas.getContext('2d');
-
-  if (imgLoaded) {
-    offCtx.drawImage(img, 0, 0, offCanvas.width, offCanvas.height);
-  }
-  pCtx.fillStyle = '#00050d';
-  pCtx.fillRect(0, 0, pCanvas.width, pCanvas.height);
-  currentScanY = 0;
 }
+resizeAscii();
 window.addEventListener('resize', resizeAscii);
 
-function renderAsciiTracer() {
-  if (!imgLoaded || !offCtx) return;
+const cryptoChars = '0123456789ABCDEFλπ{}<>#*+=-:. ';
+const traceCols = 40;
+let scanLineY = 0;
 
-  // Process rows downward line-by-line
-  const rowsPerFrame = 4;
-  for (let r = 0; r < rowsPerFrame; r++) {
-    if (currentScanY >= pCanvas.height) {
-      currentScanY = 0; // Seamless loop back to top
-    }
+function drawFineCryptoTracer() {
+  // Gentle dark fade to keep background transparent/clear
+  pCtx.fillStyle = 'rgba(0, 5, 15, 0.1)';
+  pCtx.fillRect(0, 0, pCanvas.width, pCanvas.height);
 
-    const y = currentScanY;
-    const imgData = offCtx.getImageData(0, y, pCanvas.width, stepY).data;
+  const cellW = pCanvas.width / traceCols;
+  const cellH = 10;
 
-    for (let x = 0; x < pCanvas.width; x += stepX) {
-      const idx = (x + 0) * 4;
-      const red = imgData[idx];
-      const green = imgData[idx + 1];
-      const blue = imgData[idx + 2];
+  // Render 3 consecutive tracing scanlines per cycle
+  for (let s = 0; s < 3; s++) {
+    const y = (scanLineY + s * cellH) % pCanvas.height;
 
-      if (red !== undefined) {
-        const brightness = (red * 0.299 + green * 0.587 + blue * 0.114) / 255;
-        const charIdx = Math.floor((1 - brightness) * (charLen - 1));
-        const glyph = asciiChars[charIdx] || '0';
+    for (let c = 0; c < traceCols; c++) {
+      if (Math.random() > 0.45) {
+        const char = cryptoChars[Math.floor(Math.random() * cryptoChars.length)];
+        const x = c * cellW;
 
-        // Clear cell and paint traced cryptographic character preserving photo chromatic values
-        pCtx.fillStyle = '#00050d';
-        pCtx.fillRect(x, y, stepX, stepY);
-
-        // Render glyph with subtle cyber hue enhancement
-        pCtx.fillStyle = `rgb(${Math.min(255, red + 15)}, ${Math.min(255, green + 25)}, ${Math.min(255, blue + 35)})`;
-        pCtx.font = 'bold 9px "Share Tech Mono", monospace';
-        pCtx.fillText(glyph, x, y + stepY - 2);
+        // Subtle glowing cyber tints matching facial highlights
+        pCtx.fillStyle = Math.random() > 0.65 ? '#00ffff' : '#ff2d8a';
+        pCtx.font = '600 7px "Share Tech Mono", monospace';
+        pCtx.fillText(char, x, y + 8);
       }
     }
-    currentScanY += stepY;
   }
-}
-setInterval(renderAsciiTracer, 16);
 
-// Entropic live ticker
+  scanLineY = (scanLineY + cellH) % pCanvas.height;
+}
+setInterval(drawFineCryptoTracer, 35);
+
+// STREAMING DYNAMIC HUD STRINGS
 setInterval(() => {
+  const keyEl = document.getElementById('hud-live-key');
+  const hashEl = document.getElementById('hud-live-hash');
   const entropyEl = document.getElementById('hud-entropy');
-  if (entropyEl) entropyEl.textContent = `ENTROPY: ${(99.8 + Math.random() * 0.19).toFixed(2)}%`;
+
+  const hexBytes = ['0xD2', '0x1A', '0x7F', '0xBC', '0x4E', '0x99'];
+  const randByte = hexBytes[Math.floor(Math.random() * hexBytes.length)];
+  const randKey = `${randByte}...${Math.floor(Math.random() * 89 + 10)}`;
+
+  if (keyEl) keyEl.textContent = randKey;
+  if (hashEl) hashEl.textContent = `0x${Math.floor(Math.random() * 0xFFFFFF).toString(16).toUpperCase()}`;
+  if (entropyEl) entropyEl.textContent = `ENTROPY: ${(99.8 + Math.random() * 0.15).toFixed(2)}%`;
 }, 220);
 
 function handleSubmit(e) {
