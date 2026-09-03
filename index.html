@@ -8,16 +8,16 @@
 <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&family=VT323&display=swap" rel="stylesheet">
 <style>
   :root {
-    --green: #00aaff;
-    --green-dim: #0077cc;
-    --green-dark: #001a3b;
-    --green-glow: rgba(0,170,255,0.45);
+    --blue: #00aaff;
+    --blue-dim: #0077cc;
+    --blue-dark: #001a3b;
+    --blue-glow: rgba(0,170,255,0.7);
     --bg: #000000;
     --bg2: #00050d;
     --grey: #8a93a0;
     --white: #e0f0ff;
-    --red: #cc00ff;
-    --cyan: #ff2d8a;
+    --purple: #aa33ff;
+    --pink: #ff2d8a;
     --amber: #ff69c0;
   }
 
@@ -26,7 +26,7 @@
 
   body {
     background: var(--bg);
-    color: var(--green);
+    color: var(--blue);
     font-family: 'Share Tech Mono', monospace;
     overflow-x: hidden;
     cursor: crosshair;
@@ -68,7 +68,7 @@
     justify-content: space-between;
     align-items: center;
     padding: 14px 48px;
-    background: rgba(0,0,0,0.78);
+    background: rgba(0,0,0,0.8);
     border-bottom: 1px solid rgba(0,170,255,0.25);
     backdrop-filter: blur(8px);
   }
@@ -76,22 +76,21 @@
   .nav-logo {
     display: flex;
     align-items: center;
-    gap: 12px;
     text-decoration: none;
-    transition: transform 0.2s ease;
+    transition: transform 0.25s ease;
   }
   .nav-logo:hover {
-    transform: scale(1.05);
+    transform: scale(1.06);
   }
 
-  /* SVG Hexagon SMR Emblem */
+  /* Crisp Hexagonal SMR Monogram Vector */
   .nav-logo svg {
-    width: 38px;
-    height: 38px;
-    filter: drop-shadow(0 0 8px rgba(0, 170, 255, 0.65));
+    width: 44px;
+    height: 44px;
+    filter: drop-shadow(0 0 10px rgba(0, 170, 255, 0.7));
   }
 
-  nav ul { list-style: none; display: flex; gap: 26px; }
+  nav ul { list-style: none; display: flex; gap: 24px; }
 
   nav ul a {
     color: var(--grey);
@@ -102,8 +101,8 @@
     transition: color 0.2s, text-shadow 0.2s;
   }
 
-  nav ul a::before { content: '// '; color: var(--green-dim); opacity: 0; transition: opacity 0.2s; }
-  nav ul a:hover { color: var(--green); text-shadow: 0 0 8px var(--green-glow); }
+  nav ul a::before { content: '// '; color: var(--blue-dim); opacity: 0; transition: opacity 0.2s; }
+  nav ul a:hover { color: var(--blue); text-shadow: 0 0 8px var(--blue-glow); }
   nav ul a:hover::before { opacity: 1; }
 
   /* HERO */
@@ -120,7 +119,7 @@
 
   .hero-tag {
     font-size: 0.78rem;
-    color: var(--cyan);
+    color: var(--pink);
     letter-spacing: 3px;
     text-transform: uppercase;
     margin-bottom: 16px;
@@ -128,17 +127,19 @@
     animation: fadeInUp 0.8s 0.3s forwards;
   }
 
-  /* CYBER CHROMATIC SLICE GLITCH (White -> Multi-layer Offset -> White) */
+  /* GLOWING BLUE HERO NAME WITH BLUE -> PURPLE -> PINK GLITCH */
   .hero-name {
     font-family: 'Orbitron', monospace;
-    font-size: clamp(3rem, 7vw, 5.5rem);
+    font-size: clamp(3.2rem, 7.5vw, 6rem);
     font-weight: 900;
     line-height: 1.1;
-    letter-spacing: 3px;
+    letter-spacing: 4px;
     position: relative;
     display: inline-block;
-    color: #ffffff;
-    text-shadow: 0 0 20px rgba(255, 255, 255, 0.4), 0 0 40px rgba(0, 170, 255, 0.25);
+    color: #e0f4ff;
+    text-shadow: 0 0 15px rgba(0, 170, 255, 0.9),
+                 0 0 30px rgba(0, 170, 255, 0.7),
+                 0 0 60px rgba(0, 170, 255, 0.45);
     opacity: 0;
     animation: fadeInUp 0.8s 0.5s forwards;
   }
@@ -151,77 +152,93 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: transparent;
     pointer-events: none;
   }
 
-  /* Upper/Middle Pink Slice */
+  /* Multi-stage Glitch: Blue -> Purple -> Pink */
   .hero-name::before {
-    color: #ff72b6;
-    text-shadow: -2px 0 #ff2d8a;
-    animation: glitchPinkSlice 4.5s infinite ease-in-out;
+    animation: glitchLayer1 4s infinite linear alternate-reverse;
   }
 
-  /* Lower/Middle Violet-Purple Slice */
   .hero-name::after {
-    color: #cb5eff;
-    text-shadow: 2px 0 #8e2de2;
-    animation: glitchPurpleSlice 4.5s infinite ease-in-out;
+    animation: glitchLayer2 4s infinite linear alternate-reverse;
   }
 
-  @keyframes glitchPinkSlice {
-    0%, 25%, 70%, 100% {
+  @keyframes glitchLayer1 {
+    0%, 15% {
       opacity: 0;
       transform: translate(0, 0);
       clip-path: inset(50% 0 50% 0);
+      color: #00d4ff;
+      text-shadow: -2px 0 #0077cc;
     }
-    30% {
+    /* Phase 1: Blue Slice */
+    20%, 35% {
       opacity: 0.95;
+      color: #00f0ff;
+      text-shadow: -3px 0 #0055ff;
       transform: translate(-3px, -1px);
-      clip-path: inset(28% 0 38% 0);
+      clip-path: inset(25% 0 45% 0);
     }
-    45% {
+    /* Phase 2: Purple Slice */
+    45%, 65% {
       opacity: 0.95;
+      color: #b84dff;
+      text-shadow: -3px 0 #7700ff;
       transform: translate(3px, 1px);
-      clip-path: inset(32% 0 35% 0);
+      clip-path: inset(18% 0 52% 0);
     }
-    55% {
+    /* Phase 3: Pink Slice */
+    75%, 92% {
       opacity: 0.95;
-      transform: translate(-4px, 0);
-      clip-path: inset(25% 0 42% 0);
-    }
-    65% {
-      opacity: 0.95;
-      transform: translate(2px, 0);
-      clip-path: inset(30% 0 40% 0);
-    }
-  }
-
-  @keyframes glitchPurpleSlice {
-    0%, 25%, 70%, 100% {
-      opacity: 0;
-      transform: translate(0, 0);
-      clip-path: inset(50% 0 50% 0);
-    }
-    30% {
-      opacity: 0.95;
-      transform: translate(3px, 1px);
-      clip-path: inset(42% 0 25% 0);
-    }
-    45% {
-      opacity: 0.95;
-      transform: translate(-3px, -1px);
-      clip-path: inset(38% 0 28% 0);
-    }
-    55% {
-      opacity: 0.95;
-      transform: translate(4px, 1px);
-      clip-path: inset(45% 0 22% 0);
-    }
-    65% {
-      opacity: 0.95;
+      color: #ff3b94;
+      text-shadow: -3px 0 #ff0055;
       transform: translate(-2px, 0);
+      clip-path: inset(35% 0 35% 0);
+    }
+    97%, 100% {
+      opacity: 0;
+      transform: translate(0, 0);
+      clip-path: inset(50% 0 50% 0);
+    }
+  }
+
+  @keyframes glitchLayer2 {
+    0%, 15% {
+      opacity: 0;
+      transform: translate(0, 0);
+      clip-path: inset(50% 0 50% 0);
+      color: #0077cc;
+      text-shadow: 2px 0 #00d4ff;
+    }
+    /* Phase 1: Blue Offset */
+    20%, 35% {
+      opacity: 0.95;
+      color: #0088ff;
+      text-shadow: 3px 0 #00ffff;
+      transform: translate(3px, 1px);
+      clip-path: inset(45% 0 25% 0);
+    }
+    /* Phase 2: Purple Offset */
+    45%, 65% {
+      opacity: 0.95;
+      color: #8c2bff;
+      text-shadow: 3px 0 #cc55ff;
+      transform: translate(-3px, -1px);
+      clip-path: inset(52% 0 18% 0);
+    }
+    /* Phase 3: Pink Offset */
+    75%, 92% {
+      opacity: 0.95;
+      color: #ff66b2;
+      text-shadow: 3px 0 #ff1493;
+      transform: translate(3px, 0);
       clip-path: inset(40% 0 30% 0);
+    }
+    97%, 100% {
+      opacity: 0;
+      transform: translate(0, 0);
+      clip-path: inset(50% 0 50% 0);
     }
   }
 
@@ -229,7 +246,7 @@
     font-size: 0.75rem;
     color: var(--amber);
     letter-spacing: 3px;
-    margin-top: 8px;
+    margin-top: 10px;
     opacity: 0;
     animation: fadeInUp 0.8s 0.6s forwards;
   }
@@ -244,7 +261,7 @@
     opacity: 0;
     animation: fadeInUp 0.8s 0.7s forwards;
   }
-  .hero-title .sep { color: var(--green); margin: 0 12px; }
+  .hero-title .sep { color: var(--blue); margin: 0 10px; }
 
   /* TERMINAL */
   .terminal {
@@ -252,7 +269,7 @@
     border: 1px solid rgba(0,170,255,0.35);
     border-radius: 4px;
     padding: 24px;
-    max-width: 540px;
+    max-width: 580px;
     font-size: 0.85rem;
     line-height: 1.8;
     position: relative;
@@ -273,9 +290,9 @@
 
   .terminal-dots { position: absolute; top: 8px; left: 12px; display: flex; gap: 6px; }
   .terminal-dots span { width: 10px; height: 10px; border-radius: 50%; display: block; }
-  .terminal-dots span:nth-child(1) { background: var(--cyan); }
+  .terminal-dots span:nth-child(1) { background: var(--pink); }
   .terminal-dots span:nth-child(2) { background: var(--amber); }
-  .terminal-dots span:nth-child(3) { background: var(--green); }
+  .terminal-dots span:nth-child(3) { background: var(--blue); }
 
   .terminal-title {
     position: absolute;
@@ -288,15 +305,15 @@
 
   .terminal-body { margin-top: 20px; }
   .terminal-line { display: flex; align-items: flex-start; gap: 8px; }
-  .prompt { color: var(--green); flex-shrink: 0; }
+  .prompt { color: var(--blue); flex-shrink: 0; }
   .cmd { color: var(--white); }
   .output { color: var(--grey); padding-left: 16px; }
-  .output.success { color: var(--green); }
+  .output.success { color: var(--blue); }
 
   .cursor-blink {
     display: inline-block;
     width: 8px; height: 14px;
-    background: var(--green);
+    background: var(--blue);
     animation: blink 1s step-end infinite;
     vertical-align: middle;
     margin-left: 2px;
@@ -315,7 +332,7 @@
   .section-label {
     font-family: 'Orbitron', monospace;
     font-size: 0.65rem;
-    color: var(--cyan);
+    color: var(--pink);
     letter-spacing: 4px;
     text-transform: uppercase;
   }
@@ -326,7 +343,7 @@
     font-weight: 700;
     color: var(--white);
     letter-spacing: 2px;
-    text-shadow: 0 0 20px var(--green-glow);
+    text-shadow: 0 0 20px var(--blue-glow);
   }
 
   .section-line {
@@ -334,69 +351,6 @@
     height: 1px;
     background: linear-gradient(to right, rgba(0,170,255,0.45), transparent);
   }
-
-  /* ABOUT */
-  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; }
-  .about-text { color: var(--grey); font-size: 0.9rem; line-height: 2; }
-  .about-text p { margin-bottom: 16px; }
-  .about-text strong { color: var(--green); }
-
-  .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-  .stat-card {
-    background: rgba(0,170,255,0.04);
-    border: 1px solid rgba(0,170,255,0.18);
-    padding: 20px;
-    border-radius: 2px;
-    position: relative;
-  }
-  .stat-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0;
-    width: 3px; height: 100%;
-    background: var(--green);
-  }
-  .stat-val {
-    font-family: 'Orbitron', monospace;
-    font-size: 1.6rem;
-    color: var(--green);
-    font-weight: 700;
-    text-shadow: 0 0 10px var(--green-glow);
-  }
-  .stat-label { font-size: 0.7rem; color: var(--grey); letter-spacing: 2px; text-transform: uppercase; margin-top: 4px; }
-
-  /* EXPERIENCE TIMELINE */
-  .timeline { position: relative; padding-left: 30px; }
-  .timeline::before {
-    content: '';
-    position: absolute;
-    left: 0; top: 0; bottom: 0;
-    width: 1px;
-    background: linear-gradient(to bottom, var(--green), transparent);
-  }
-
-  .timeline-item {
-    position: relative;
-    margin-bottom: 40px;
-    padding: 24px;
-    background: rgba(0,170,255,0.025);
-    border: 1px solid rgba(0,170,255,0.12);
-    border-radius: 2px;
-  }
-
-  .timeline-item::before {
-    content: '▶';
-    position: absolute;
-    left: -37px; top: 24px;
-    color: var(--green);
-    font-size: 0.7rem;
-    text-shadow: 0 0 6px var(--green-glow);
-  }
-
-  .timeline-role { font-family: 'Orbitron', monospace; font-size: 0.95rem; color: var(--white); font-weight: 700; margin-bottom: 4px; }
-  .timeline-company { color: var(--green); font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 4px; }
-  .timeline-date { color: var(--grey); font-size: 0.72rem; letter-spacing: 2px; margin-bottom: 12px; }
-  .timeline-desc { color: var(--grey); font-size: 0.85rem; line-height: 1.8; }
 
   /* TECH STACK & SKILLS */
   .skills-wrapper {
@@ -480,6 +434,69 @@
   .cat-ides .skill-badge { border-color: rgba(46, 160, 67, 0.45); color: #56d364; }
   .cat-ides .skill-badge:hover { border-color: #39d353; background: rgba(46, 160, 67, 0.22); box-shadow: 0 0 16px rgba(57, 211, 83, 0.4); transform: translateY(-2px); }
 
+  /* ABOUT */
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; }
+  .about-text { color: var(--grey); font-size: 0.9rem; line-height: 2; }
+  .about-text p { margin-bottom: 16px; }
+  .about-text strong { color: var(--blue); }
+
+  .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .stat-card {
+    background: rgba(0,170,255,0.04);
+    border: 1px solid rgba(0,170,255,0.18);
+    padding: 20px;
+    border-radius: 2px;
+    position: relative;
+  }
+  .stat-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px; height: 100%;
+    background: var(--blue);
+  }
+  .stat-val {
+    font-family: 'Orbitron', monospace;
+    font-size: 1.6rem;
+    color: var(--blue);
+    font-weight: 700;
+    text-shadow: 0 0 10px var(--blue-glow);
+  }
+  .stat-label { font-size: 0.7rem; color: var(--grey); letter-spacing: 2px; text-transform: uppercase; margin-top: 4px; }
+
+  /* EXPERIENCE TIMELINE */
+  .timeline { position: relative; padding-left: 30px; }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 1px;
+    background: linear-gradient(to bottom, var(--blue), transparent);
+  }
+
+  .timeline-item {
+    position: relative;
+    margin-bottom: 40px;
+    padding: 24px;
+    background: rgba(0,170,255,0.025);
+    border: 1px solid rgba(0,170,255,0.12);
+    border-radius: 2px;
+  }
+
+  .timeline-item::before {
+    content: '▶';
+    position: absolute;
+    left: -37px; top: 24px;
+    color: var(--blue);
+    font-size: 0.7rem;
+    text-shadow: 0 0 6px var(--blue-glow);
+  }
+
+  .timeline-role { font-family: 'Orbitron', monospace; font-size: 0.95rem; color: var(--white); font-weight: 700; margin-bottom: 4px; }
+  .timeline-company { color: var(--blue); font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 4px; }
+  .timeline-date { color: var(--grey); font-size: 0.72rem; letter-spacing: 2px; margin-bottom: 12px; }
+  .timeline-desc { color: var(--grey); font-size: 0.85rem; line-height: 1.8; }
+
   /* PROJECTS & RESEARCH CARDS */
   .cards-grid {
     display: grid;
@@ -499,13 +516,13 @@
   }
 
   .terminal-card:hover {
-    border-color: var(--green);
+    border-color: var(--blue);
     transform: translateY(-4px);
     box-shadow: 0 8px 30px rgba(0, 170, 255, 0.12);
   }
 
   .card-top { margin-bottom: 16px; }
-  .card-tag { font-size: 0.68rem; color: var(--cyan); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 6px; }
+  .card-tag { font-size: 0.68rem; color: var(--pink); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 6px; }
   .card-title { font-family: 'Orbitron', monospace; font-size: 1.05rem; color: var(--white); font-weight: 700; margin-bottom: 10px; }
   .card-desc { color: var(--grey); font-size: 0.85rem; line-height: 1.8; margin-bottom: 16px; }
 
@@ -516,7 +533,7 @@
     border-radius: 2px;
     background: rgba(0, 170, 255, 0.08);
     border: 1px solid rgba(0, 170, 255, 0.25);
-    color: var(--green);
+    color: var(--blue);
   }
 
   /* EDUCATION */
@@ -528,7 +545,7 @@
     border-radius: 2px;
   }
   .edu-school { font-family: 'Orbitron', monospace; font-size: 0.85rem; color: var(--white); font-weight: 700; margin-bottom: 6px; }
-  .edu-degree { color: var(--green); font-size: 0.8rem; margin-bottom: 4px; }
+  .edu-degree { color: var(--blue); font-size: 0.8rem; margin-bottom: 4px; }
   .edu-date { color: var(--grey); font-size: 0.72rem; letter-spacing: 2px; margin-bottom: 10px; }
   .edu-grade { color: var(--amber); font-size: 0.75rem; }
 
@@ -544,16 +561,16 @@
     font-size: 0.85rem;
     text-decoration: none;
   }
-  .contact-item:hover { color: var(--green); }
-  .contact-item .ico { color: var(--green); font-size: 1rem; width: 24px; text-align: center; }
+  .contact-item:hover { color: var(--blue); }
+  .contact-item .ico { color: var(--blue); font-size: 1rem; width: 24px; text-align: center; }
 
   .contact-form { display: flex; flex-direction: column; gap: 16px; }
   .form-group { display: flex; flex-direction: column; gap: 6px; }
-  .form-label { font-size: 0.7rem; color: var(--cyan); letter-spacing: 3px; text-transform: uppercase; }
+  .form-label { font-size: 0.7rem; color: var(--pink); letter-spacing: 3px; text-transform: uppercase; }
   .form-input, .form-textarea {
     background: rgba(0,5,15,0.82);
     border: 1px solid rgba(0,170,255,0.22);
-    color: var(--green);
+    color: var(--blue);
     font-family: 'Share Tech Mono', monospace;
     font-size: 0.85rem;
     padding: 12px 16px;
@@ -565,8 +582,8 @@
 
   .btn-send {
     background: transparent;
-    border: 1px solid var(--green);
-    color: var(--green);
+    border: 1px solid var(--blue);
+    color: var(--blue);
     font-family: 'Orbitron', monospace;
     font-size: 0.75rem;
     letter-spacing: 3px;
@@ -611,18 +628,18 @@
 <!-- NAV -->
 <nav>
   <a class="nav-logo" href="#">
-    <!-- SMR Hexagonal Monogram Logo -->
+    <!-- Sharp Hexagonal SMR Monogram -->
     <svg viewBox="0 0 300 260" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <polygon points="150,5 290,75 290,185 150,255 10,185 10,75" stroke="#ffffff" stroke-width="8" fill="#000000" />
-      <path d="M 95,85 L 60,85 L 60,118 L 95,124 L 95,175 L 30,175 L 30,150 L 65,150 L 65,138 L 30,132 L 30,85 Z" fill="#ffffff" />
-      <path d="M 115,62 L 140,62 L 150,110 L 160,62 L 185,62 L 185,198 L 165,198 L 165,105 L 150,155 L 135,105 L 135,198 L 115,198 Z" fill="#ffffff" />
-      <path d="M 205,85 L 255,85 C 265,85 270,92 270,105 C 270,118 265,125 255,125 L 230,125 L 230,140 L 270,175 L 245,175 L 210,142 L 205,142 L 205,175 L 185,175 L 185,85 Z M 205,105 L 205,118 L 245,118 C 248,118 250,115 250,111 C 250,107 248,105 245,105 Z" fill="#ffffff" />
+      <polygon points="150,5 290,75 290,185 150,255 10,185 10,75" stroke="#ffffff" stroke-width="7" fill="#000000" />
+      <path d="M 98,82 L 56,82 L 56,118 L 98,124 L 98,178 L 28,178 L 28,150 L 68,150 L 68,136 L 28,130 L 28,82 Z" fill="#ffffff" />
+      <path d="M 116,56 L 140,56 L 150,110 L 160,56 L 184,56 L 184,204 L 164,204 L 164,104 L 150,158 L 136,104 L 136,204 L 116,204 Z" fill="#ffffff" />
+      <path d="M 204,82 L 256,82 C 268,82 274,90 274,104 C 274,118 268,126 256,126 L 228,126 L 228,140 L 272,178 L 246,178 L 210,144 L 204,144 L 204,178 L 184,178 L 184,82 Z M 204,104 L 204,118 L 246,118 C 250,118 252,115 252,111 C 252,107 250,104 246,104 Z" fill="#ffffff" />
     </svg>
   </a>
   <ul>
+    <li><a href="#skills">Skills</a></li>
     <li><a href="#about">About</a></li>
     <li><a href="#experience">Experience</a></li>
-    <li><a href="#skills">Skills</a></li>
     <li><a href="#projects">Projects</a></li>
     <li><a href="#research">Research</a></li>
     <li><a href="#education">Education</a></li>
@@ -637,6 +654,8 @@
   <p class="hero-pronouns">she / her</p>
   <p class="hero-title">
     Cybersecurity <span class="sep">|</span>
+    AI <span class="sep">|</span>
+    Data <span class="sep">|</span>
     Computer Science <span class="sep">|</span>
     Problem Solver
   </p>
@@ -650,80 +669,10 @@
 
 <hr class="divider">
 
-<!-- ABOUT -->
-<section id="about">
-  <div class="section-header">
-    <span class="section-label">01</span>
-    <h2 class="section-title">ABOUT_ME.sh</h2>
-    <div class="section-line"></div>
-  </div>
-  <div class="about-grid">
-    <div class="about-text">
-      <p>I'm a <strong>Computer Science student</strong> at the University of Calgary with a strong focus on cybersecurity, defensive tooling, and modern software architectures.</p>
-      <p>Currently serving as <strong>Jr. VP of Academic</strong> at The Cybersecurity Club - UCalgary and <strong>Jr. VP of Events</strong> at Tech Start UCalgary, I actively coordinate tech initiatives and competitions across campus.</p>
-      <p>Beyond academics, I volunteer as a <strong>Mathematics Tutor</strong> at YMCA Canada, helping students develop robust analytical and logical foundations.</p>
-    </div>
-    <div class="stats-grid">
-      <div class="stat-card">
-        <div class="stat-val">2</div>
-        <div class="stat-label">Leadership Roles</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-val">2+</div>
-        <div class="stat-label">Yrs Volunteering</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-val">BSc</div>
-        <div class="stat-label">Computer Sci</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-val">∞</div>
-        <div class="stat-label">Curiosity</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<hr class="divider">
-
-<!-- EXPERIENCE -->
-<section id="experience">
-  <div class="section-header">
-    <span class="section-label">02</span>
-    <h2 class="section-title">EXPERIENCE.log</h2>
-    <div class="section-line"></div>
-  </div>
-
-  <div class="timeline">
-    <div class="timeline-item">
-      <div class="timeline-role">Jr. VP of Academic</div>
-      <div class="timeline-company">The Cybersecurity Club — UCalgary</div>
-      <div class="timeline-date">Oct 2025 – Present · Calgary, Alberta, Canada</div>
-      <div class="timeline-desc">Leading academic workshops, CTF training sessions, and technical resources for club members. Co-hosted Magpie CTF, orchestrating challenge design and behind-the-scenes competition infrastructure.</div>
-    </div>
-
-    <div class="timeline-item">
-      <div class="timeline-role">Jr. VP of Events</div>
-      <div class="timeline-company">Tech Start UCalgary</div>
-      <div class="timeline-date">Aug 2025 – Present · Calgary, Alberta, Canada</div>
-      <div class="timeline-desc">Organizing tech gatherings, industry networking events, and software showcases for student project teams and startup founders.</div>
-    </div>
-
-    <div class="timeline-item">
-      <div class="timeline-role">Mathematics Tutor</div>
-      <div class="timeline-company">YMCA Canada · Volunteering</div>
-      <div class="timeline-date">Jun 2023 – Present · 2 yrs+</div>
-      <div class="timeline-desc">Mentoring high school and middle school students in algebra, calculus, and foundational logic to instill strong analytical skills.</div>
-    </div>
-  </div>
-</section>
-
-<hr class="divider">
-
-<!-- SKILLS -->
+<!-- 01: TECH STACK & SKILLS (PLACED IMMEDIATELY AFTER HERO) -->
 <section id="skills">
   <div class="section-header">
-    <span class="section-label">03</span>
+    <span class="section-label">01</span>
     <h2 class="section-title">TECH STACK &amp; SKILLS</h2>
     <div class="section-line"></div>
   </div>
@@ -803,7 +752,77 @@
 
 <hr class="divider">
 
-<!-- PROJECTS -->
+<!-- 02: ABOUT ME -->
+<section id="about">
+  <div class="section-header">
+    <span class="section-label">02</span>
+    <h2 class="section-title">ABOUT_ME.sh</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="about-grid">
+    <div class="about-text">
+      <p>I'm a <strong>Computer Science student</strong> at the University of Calgary with a strong focus on cybersecurity, defensive tooling, and modern software architectures.</p>
+      <p>Currently serving as <strong>Jr. VP of Academic</strong> at The Cybersecurity Club - UCalgary and <strong>Jr. VP of Events</strong> at Tech Start UCalgary, I actively coordinate tech initiatives and competitions across campus.</p>
+      <p>Beyond academics, I volunteer as a <strong>Mathematics Tutor</strong> at YMCA Canada, helping students develop robust analytical and logical foundations.</p>
+    </div>
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-val">2</div>
+        <div class="stat-label">Leadership Roles</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-val">2+</div>
+        <div class="stat-label">Yrs Volunteering</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-val">BSc</div>
+        <div class="stat-label">Computer Sci</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-val">∞</div>
+        <div class="stat-label">Curiosity</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- 03: EXPERIENCE -->
+<section id="experience">
+  <div class="section-header">
+    <span class="section-label">03</span>
+    <h2 class="section-title">EXPERIENCE.log</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="timeline-role">Jr. VP of Academic</div>
+      <div class="timeline-company">The Cybersecurity Club — UCalgary</div>
+      <div class="timeline-date">Oct 2025 – Present · Calgary, Alberta, Canada</div>
+      <div class="timeline-desc">Leading academic workshops, CTF training sessions, and technical resources for club members. Co-hosted Magpie CTF, orchestrating challenge design and behind-the-scenes competition infrastructure.</div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-role">Jr. VP of Events</div>
+      <div class="timeline-company">Tech Start UCalgary</div>
+      <div class="timeline-date">Aug 2025 – Present · Calgary, Alberta, Canada</div>
+      <div class="timeline-desc">Organizing tech gatherings, industry networking events, and software showcases for student project teams and startup founders.</div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-role">Mathematics Tutor</div>
+      <div class="timeline-company">YMCA Canada · Volunteering</div>
+      <div class="timeline-date">Jun 2023 – Present · 2 yrs+</div>
+      <div class="timeline-desc">Mentoring high school and middle school students in algebra, calculus, and foundational logic to instill strong analytical skills.</div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- 04: PROJECTS -->
 <section id="projects">
   <div class="section-header">
     <span class="section-label">04</span>
@@ -855,7 +874,7 @@
 
 <hr class="divider">
 
-<!-- RESEARCH -->
+<!-- 05: RESEARCH -->
 <section id="research">
   <div class="section-header">
     <span class="section-label">05</span>
@@ -892,7 +911,7 @@
 
 <hr class="divider">
 
-<!-- EDUCATION -->
+<!-- 06: EDUCATION -->
 <section id="education">
   <div class="section-header">
     <span class="section-label">06</span>
@@ -919,7 +938,7 @@
 
 <hr class="divider">
 
-<!-- CONTACT -->
+<!-- 07: CONTACT -->
 <section id="contact">
   <div class="section-header">
     <span class="section-label">07</span>
