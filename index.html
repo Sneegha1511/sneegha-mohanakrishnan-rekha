@@ -8,16 +8,16 @@
 <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&family=VT323&display=swap" rel="stylesheet">
 <style>
   :root {
-    --blue: #00aaff;
-    --blue-dim: #0077cc;
-    --blue-dark: #001a3b;
-    --blue-glow: rgba(0,170,255,0.7);
+    --green: #00aaff;
+    --green-dim: #0077cc;
+    --green-dark: #001a3b;
+    --green-glow: rgba(0,170,255,0.35);
     --bg: #000000;
     --bg2: #00050d;
     --grey: #8a93a0;
-    --white: #e0f0ff;
-    --purple: #aa33ff;
-    --pink: #ff2d8a;
+    --white: #f5faff;
+    --red: #cc00ff;
+    --cyan: #ff2d8a;
     --amber: #ff69c0;
   }
 
@@ -26,7 +26,7 @@
 
   body {
     background: var(--bg);
-    color: var(--blue);
+    color: var(--green);
     font-family: 'Share Tech Mono', monospace;
     overflow-x: hidden;
     cursor: crosshair;
@@ -67,8 +67,8 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 14px 48px;
-    background: rgba(0,0,0,0.8);
+    padding: 12px 48px;
+    background: rgba(0,0,0,0.82);
     border-bottom: 1px solid rgba(0,170,255,0.25);
     backdrop-filter: blur(8px);
   }
@@ -77,17 +77,18 @@
     display: flex;
     align-items: center;
     text-decoration: none;
-    transition: transform 0.25s ease;
+    transition: transform 0.2s ease;
   }
   .nav-logo:hover {
-    transform: scale(1.06);
+    transform: scale(1.05);
   }
 
-  /* Crisp Hexagonal SMR Monogram Vector */
+  /* Vector Hexagon SMR Monogram (Sharp & Crystal Clear) */
   .nav-logo svg {
     width: 44px;
     height: 44px;
-    filter: drop-shadow(0 0 10px rgba(0, 170, 255, 0.7));
+    display: block;
+    filter: drop-shadow(0 0 6px rgba(0, 170, 255, 0.45));
   }
 
   nav ul { list-style: none; display: flex; gap: 24px; }
@@ -101,8 +102,8 @@
     transition: color 0.2s, text-shadow 0.2s;
   }
 
-  nav ul a::before { content: '// '; color: var(--blue-dim); opacity: 0; transition: opacity 0.2s; }
-  nav ul a:hover { color: var(--blue); text-shadow: 0 0 8px var(--blue-glow); }
+  nav ul a::before { content: '// '; color: var(--green-dim); opacity: 0; transition: opacity 0.2s; }
+  nav ul a:hover { color: var(--green); text-shadow: 0 0 8px var(--green-glow); }
   nav ul a:hover::before { opacity: 1; }
 
   /* HERO */
@@ -119,7 +120,7 @@
 
   .hero-tag {
     font-size: 0.78rem;
-    color: var(--pink);
+    color: var(--cyan);
     letter-spacing: 3px;
     text-transform: uppercase;
     margin-bottom: 16px;
@@ -127,19 +128,18 @@
     animation: fadeInUp 0.8s 0.3s forwards;
   }
 
-  /* GLOWING BLUE HERO NAME WITH BLUE -> PURPLE -> PINK GLITCH */
+  /* CYBER CHROMATIC SLICE GLITCH (White -> Blue -> Purple -> Pink -> White) */
   .hero-name {
     font-family: 'Orbitron', monospace;
-    font-size: clamp(3.2rem, 7.5vw, 6rem);
+    font-size: clamp(3.2rem, 7.5vw, 5.8rem);
     font-weight: 900;
     line-height: 1.1;
-    letter-spacing: 4px;
+    letter-spacing: 3px;
     position: relative;
     display: inline-block;
-    color: #e0f4ff;
-    text-shadow: 0 0 15px rgba(0, 170, 255, 0.9),
-                 0 0 30px rgba(0, 170, 255, 0.7),
-                 0 0 60px rgba(0, 170, 255, 0.45);
+    color: #ffffff;
+    /* Balanced, crisp blue glow without oversaturation */
+    text-shadow: 0 0 10px rgba(0, 170, 255, 0.5), 0 0 24px rgba(0, 170, 255, 0.25);
     opacity: 0;
     animation: fadeInUp 0.8s 0.5s forwards;
   }
@@ -152,93 +152,79 @@
     left: 0;
     width: 100%;
     height: 100%;
+    background: transparent;
     pointer-events: none;
   }
 
-  /* Multi-stage Glitch: Blue -> Purple -> Pink */
+  /* Primary Slice Layer: Phased Blue -> Purple -> Pink */
   .hero-name::before {
-    animation: glitchLayer1 4s infinite linear alternate-reverse;
+    animation: glitchPhaseA 5s infinite ease-in-out;
   }
 
+  /* Complementary Slice Layer: Off-axis displacement */
   .hero-name::after {
-    animation: glitchLayer2 4s infinite linear alternate-reverse;
+    animation: glitchPhaseB 5s infinite ease-in-out;
   }
 
-  @keyframes glitchLayer1 {
-    0%, 15% {
+  @keyframes glitchPhaseA {
+    0%, 15%, 85%, 100% {
       opacity: 0;
       transform: translate(0, 0);
       clip-path: inset(50% 0 50% 0);
-      color: #00d4ff;
-      text-shadow: -2px 0 #0077cc;
     }
-    /* Phase 1: Blue Slice */
-    20%, 35% {
-      opacity: 0.95;
-      color: #00f0ff;
-      text-shadow: -3px 0 #0055ff;
+    /* 1. Electric Blue Shift */
+    22% {
+      opacity: 0.9;
+      color: #00b4d8;
+      text-shadow: -2px 0 #0077b6;
       transform: translate(-3px, -1px);
-      clip-path: inset(25% 0 45% 0);
+      clip-path: inset(26% 0 40% 0);
     }
-    /* Phase 2: Purple Slice */
-    45%, 65% {
-      opacity: 0.95;
-      color: #b84dff;
-      text-shadow: -3px 0 #7700ff;
+    /* 2. Neon Purple Shift */
+    44% {
+      opacity: 0.9;
+      color: #9d4edd;
+      text-shadow: 2px 0 #7b2cbf;
       transform: translate(3px, 1px);
-      clip-path: inset(18% 0 52% 0);
+      clip-path: inset(34% 0 32% 0);
     }
-    /* Phase 3: Pink Slice */
-    75%, 92% {
-      opacity: 0.95;
-      color: #ff3b94;
-      text-shadow: -3px 0 #ff0055;
+    /* 3. Pink Shift */
+    66% {
+      opacity: 0.9;
+      color: #ff70a6;
+      text-shadow: -3px 0 #ff007f;
       transform: translate(-2px, 0);
-      clip-path: inset(35% 0 35% 0);
-    }
-    97%, 100% {
-      opacity: 0;
-      transform: translate(0, 0);
-      clip-path: inset(50% 0 50% 0);
+      clip-path: inset(28% 0 38% 0);
     }
   }
 
-  @keyframes glitchLayer2 {
-    0%, 15% {
+  @keyframes glitchPhaseB {
+    0%, 15%, 85%, 100% {
       opacity: 0;
       transform: translate(0, 0);
       clip-path: inset(50% 0 50% 0);
-      color: #0077cc;
-      text-shadow: 2px 0 #00d4ff;
     }
-    /* Phase 1: Blue Offset */
-    20%, 35% {
-      opacity: 0.95;
-      color: #0088ff;
-      text-shadow: 3px 0 #00ffff;
+    /* Secondary layer offset matching progression */
+    22% {
+      opacity: 0.85;
+      color: #70d6ff;
+      text-shadow: 2px 0 #0096c7;
+      transform: translate(2px, 1px);
+      clip-path: inset(42% 0 24% 0);
+    }
+    44% {
+      opacity: 0.85;
+      color: #c77dff;
+      text-shadow: -2px 0 #5a189a;
+      transform: translate(-2px, -1px);
+      clip-path: inset(40% 0 26% 0);
+    }
+    66% {
+      opacity: 0.85;
+      color: #ff99c8;
+      text-shadow: 2px 0 #d90429;
       transform: translate(3px, 1px);
-      clip-path: inset(45% 0 25% 0);
-    }
-    /* Phase 2: Purple Offset */
-    45%, 65% {
-      opacity: 0.95;
-      color: #8c2bff;
-      text-shadow: 3px 0 #cc55ff;
-      transform: translate(-3px, -1px);
-      clip-path: inset(52% 0 18% 0);
-    }
-    /* Phase 3: Pink Offset */
-    75%, 92% {
-      opacity: 0.95;
-      color: #ff66b2;
-      text-shadow: 3px 0 #ff1493;
-      transform: translate(3px, 0);
-      clip-path: inset(40% 0 30% 0);
-    }
-    97%, 100% {
-      opacity: 0;
-      transform: translate(0, 0);
-      clip-path: inset(50% 0 50% 0);
+      clip-path: inset(44% 0 22% 0);
     }
   }
 
@@ -246,7 +232,7 @@
     font-size: 0.75rem;
     color: var(--amber);
     letter-spacing: 3px;
-    margin-top: 10px;
+    margin-top: 8px;
     opacity: 0;
     animation: fadeInUp 0.8s 0.6s forwards;
   }
@@ -261,7 +247,7 @@
     opacity: 0;
     animation: fadeInUp 0.8s 0.7s forwards;
   }
-  .hero-title .sep { color: var(--blue); margin: 0 10px; }
+  .hero-title .sep { color: var(--green); margin: 0 10px; }
 
   /* TERMINAL */
   .terminal {
@@ -276,7 +262,7 @@
     overflow: hidden;
     opacity: 0;
     animation: fadeInUp 0.8s 0.9s forwards;
-    box-shadow: 0 0 30px rgba(0,170,255,0.1), inset 0 0 30px rgba(0,0,0,0.6);
+    box-shadow: 0 0 30px rgba(0,170,255,0.08), inset 0 0 30px rgba(0,0,0,0.6);
   }
 
   .terminal::before {
@@ -290,9 +276,9 @@
 
   .terminal-dots { position: absolute; top: 8px; left: 12px; display: flex; gap: 6px; }
   .terminal-dots span { width: 10px; height: 10px; border-radius: 50%; display: block; }
-  .terminal-dots span:nth-child(1) { background: var(--pink); }
+  .terminal-dots span:nth-child(1) { background: var(--cyan); }
   .terminal-dots span:nth-child(2) { background: var(--amber); }
-  .terminal-dots span:nth-child(3) { background: var(--blue); }
+  .terminal-dots span:nth-child(3) { background: var(--green); }
 
   .terminal-title {
     position: absolute;
@@ -305,15 +291,15 @@
 
   .terminal-body { margin-top: 20px; }
   .terminal-line { display: flex; align-items: flex-start; gap: 8px; }
-  .prompt { color: var(--blue); flex-shrink: 0; }
+  .prompt { color: var(--green); flex-shrink: 0; }
   .cmd { color: var(--white); }
   .output { color: var(--grey); padding-left: 16px; }
-  .output.success { color: var(--blue); }
+  .output.success { color: var(--green); }
 
   .cursor-blink {
     display: inline-block;
     width: 8px; height: 14px;
-    background: var(--blue);
+    background: var(--green);
     animation: blink 1s step-end infinite;
     vertical-align: middle;
     margin-left: 2px;
@@ -332,7 +318,7 @@
   .section-label {
     font-family: 'Orbitron', monospace;
     font-size: 0.65rem;
-    color: var(--pink);
+    color: var(--cyan);
     letter-spacing: 4px;
     text-transform: uppercase;
   }
@@ -343,7 +329,7 @@
     font-weight: 700;
     color: var(--white);
     letter-spacing: 2px;
-    text-shadow: 0 0 20px var(--blue-glow);
+    text-shadow: 0 0 15px var(--green-glow);
   }
 
   .section-line {
@@ -352,7 +338,7 @@
     background: linear-gradient(to right, rgba(0,170,255,0.45), transparent);
   }
 
-  /* TECH STACK & SKILLS */
+  /* TECH STACK & SKILLS PANEL */
   .skills-wrapper {
     background: rgba(0, 5, 12, 0.75);
     border: 1px solid rgba(255, 255, 255, 0.08);
@@ -420,25 +406,25 @@
   }
 
   .cat-lang .skill-badge { border-color: rgba(33, 94, 166, 0.55); color: #79b8ff; }
-  .cat-lang .skill-badge:hover { border-color: #388bfd; background: rgba(33, 94, 166, 0.22); box-shadow: 0 0 16px rgba(56, 139, 253, 0.4); transform: translateY(-2px); }
+  .cat-lang .skill-badge:hover { border-color: #388bfd; background: rgba(33, 94, 166, 0.22); box-shadow: 0 0 14px rgba(56, 139, 253, 0.35); transform: translateY(-2px); }
 
   .cat-frameworks .skill-badge { border-color: rgba(137, 87, 229, 0.45); color: #d2a8ff; }
-  .cat-frameworks .skill-badge:hover { border-color: #a371f7; background: rgba(137, 87, 229, 0.22); box-shadow: 0 0 16px rgba(163, 113, 247, 0.4); transform: translateY(-2px); }
+  .cat-frameworks .skill-badge:hover { border-color: #a371f7; background: rgba(137, 87, 229, 0.22); box-shadow: 0 0 14px rgba(163, 113, 247, 0.35); transform: translateY(-2px); }
 
   .cat-crypto .skill-badge { border-color: rgba(247, 120, 186, 0.45); color: #ff7b72; }
-  .cat-crypto .skill-badge:hover { border-color: #f778ba; background: rgba(247, 120, 186, 0.22); box-shadow: 0 0 16px rgba(247, 120, 186, 0.4); transform: translateY(-2px); }
+  .cat-crypto .skill-badge:hover { border-color: #f778ba; background: rgba(247, 120, 186, 0.22); box-shadow: 0 0 14px rgba(247, 120, 186, 0.35); transform: translateY(-2px); }
 
   .cat-tools .skill-badge { border-color: rgba(210, 153, 34, 0.45); color: #e3b341; }
-  .cat-tools .skill-badge:hover { border-color: #f0883e; background: rgba(210, 153, 34, 0.22); box-shadow: 0 0 16px rgba(240, 136, 62, 0.4); transform: translateY(-2px); }
+  .cat-tools .skill-badge:hover { border-color: #f0883e; background: rgba(210, 153, 34, 0.22); box-shadow: 0 0 14px rgba(240, 136, 62, 0.35); transform: translateY(-2px); }
 
   .cat-ides .skill-badge { border-color: rgba(46, 160, 67, 0.45); color: #56d364; }
-  .cat-ides .skill-badge:hover { border-color: #39d353; background: rgba(46, 160, 67, 0.22); box-shadow: 0 0 16px rgba(57, 211, 83, 0.4); transform: translateY(-2px); }
+  .cat-ides .skill-badge:hover { border-color: #39d353; background: rgba(46, 160, 67, 0.22); box-shadow: 0 0 14px rgba(57, 211, 83, 0.35); transform: translateY(-2px); }
 
   /* ABOUT */
   .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; }
   .about-text { color: var(--grey); font-size: 0.9rem; line-height: 2; }
   .about-text p { margin-bottom: 16px; }
-  .about-text strong { color: var(--blue); }
+  .about-text strong { color: var(--green); }
 
   .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
   .stat-card {
@@ -453,14 +439,14 @@
     position: absolute;
     top: 0; left: 0;
     width: 3px; height: 100%;
-    background: var(--blue);
+    background: var(--green);
   }
   .stat-val {
     font-family: 'Orbitron', monospace;
     font-size: 1.6rem;
-    color: var(--blue);
+    color: var(--green);
     font-weight: 700;
-    text-shadow: 0 0 10px var(--blue-glow);
+    text-shadow: 0 0 10px var(--green-glow);
   }
   .stat-label { font-size: 0.7rem; color: var(--grey); letter-spacing: 2px; text-transform: uppercase; margin-top: 4px; }
 
@@ -471,7 +457,7 @@
     position: absolute;
     left: 0; top: 0; bottom: 0;
     width: 1px;
-    background: linear-gradient(to bottom, var(--blue), transparent);
+    background: linear-gradient(to bottom, var(--green), transparent);
   }
 
   .timeline-item {
@@ -487,13 +473,13 @@
     content: '▶';
     position: absolute;
     left: -37px; top: 24px;
-    color: var(--blue);
+    color: var(--green);
     font-size: 0.7rem;
-    text-shadow: 0 0 6px var(--blue-glow);
+    text-shadow: 0 0 6px var(--green-glow);
   }
 
   .timeline-role { font-family: 'Orbitron', monospace; font-size: 0.95rem; color: var(--white); font-weight: 700; margin-bottom: 4px; }
-  .timeline-company { color: var(--blue); font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 4px; }
+  .timeline-company { color: var(--green); font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 4px; }
   .timeline-date { color: var(--grey); font-size: 0.72rem; letter-spacing: 2px; margin-bottom: 12px; }
   .timeline-desc { color: var(--grey); font-size: 0.85rem; line-height: 1.8; }
 
@@ -516,13 +502,13 @@
   }
 
   .terminal-card:hover {
-    border-color: var(--blue);
+    border-color: var(--green);
     transform: translateY(-4px);
     box-shadow: 0 8px 30px rgba(0, 170, 255, 0.12);
   }
 
   .card-top { margin-bottom: 16px; }
-  .card-tag { font-size: 0.68rem; color: var(--pink); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 6px; }
+  .card-tag { font-size: 0.68rem; color: var(--cyan); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 6px; }
   .card-title { font-family: 'Orbitron', monospace; font-size: 1.05rem; color: var(--white); font-weight: 700; margin-bottom: 10px; }
   .card-desc { color: var(--grey); font-size: 0.85rem; line-height: 1.8; margin-bottom: 16px; }
 
@@ -533,7 +519,7 @@
     border-radius: 2px;
     background: rgba(0, 170, 255, 0.08);
     border: 1px solid rgba(0, 170, 255, 0.25);
-    color: var(--blue);
+    color: var(--green);
   }
 
   /* EDUCATION */
@@ -545,7 +531,7 @@
     border-radius: 2px;
   }
   .edu-school { font-family: 'Orbitron', monospace; font-size: 0.85rem; color: var(--white); font-weight: 700; margin-bottom: 6px; }
-  .edu-degree { color: var(--blue); font-size: 0.8rem; margin-bottom: 4px; }
+  .edu-degree { color: var(--green); font-size: 0.8rem; margin-bottom: 4px; }
   .edu-date { color: var(--grey); font-size: 0.72rem; letter-spacing: 2px; margin-bottom: 10px; }
   .edu-grade { color: var(--amber); font-size: 0.75rem; }
 
@@ -561,16 +547,16 @@
     font-size: 0.85rem;
     text-decoration: none;
   }
-  .contact-item:hover { color: var(--blue); }
-  .contact-item .ico { color: var(--blue); font-size: 1rem; width: 24px; text-align: center; }
+  .contact-item:hover { color: var(--green); }
+  .contact-item .ico { color: var(--green); font-size: 1rem; width: 24px; text-align: center; }
 
   .contact-form { display: flex; flex-direction: column; gap: 16px; }
   .form-group { display: flex; flex-direction: column; gap: 6px; }
-  .form-label { font-size: 0.7rem; color: var(--pink); letter-spacing: 3px; text-transform: uppercase; }
+  .form-label { font-size: 0.7rem; color: var(--cyan); letter-spacing: 3px; text-transform: uppercase; }
   .form-input, .form-textarea {
     background: rgba(0,5,15,0.82);
     border: 1px solid rgba(0,170,255,0.22);
-    color: var(--blue);
+    color: var(--green);
     font-family: 'Share Tech Mono', monospace;
     font-size: 0.85rem;
     padding: 12px 16px;
@@ -582,8 +568,8 @@
 
   .btn-send {
     background: transparent;
-    border: 1px solid var(--blue);
-    color: var(--blue);
+    border: 1px solid var(--green);
+    color: var(--green);
     font-family: 'Orbitron', monospace;
     font-size: 0.75rem;
     letter-spacing: 3px;
@@ -628,12 +614,16 @@
 <!-- NAV -->
 <nav>
   <a class="nav-logo" href="#">
-    <!-- Sharp Hexagonal SMR Monogram -->
-    <svg viewBox="0 0 300 260" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <polygon points="150,5 290,75 290,185 150,255 10,185 10,75" stroke="#ffffff" stroke-width="7" fill="#000000" />
-      <path d="M 98,82 L 56,82 L 56,118 L 98,124 L 98,178 L 28,178 L 28,150 L 68,150 L 68,136 L 28,130 L 28,82 Z" fill="#ffffff" />
-      <path d="M 116,56 L 140,56 L 150,110 L 160,56 L 184,56 L 184,204 L 164,204 L 164,104 L 150,158 L 136,104 L 136,204 L 116,204 Z" fill="#ffffff" />
-      <path d="M 204,82 L 256,82 C 268,82 274,90 274,104 C 274,118 268,126 256,126 L 228,126 L 228,140 L 272,178 L 246,178 L 210,144 L 204,144 L 204,178 L 184,178 L 184,82 Z M 204,104 L 204,118 L 246,118 C 250,118 252,115 252,111 C 252,107 250,104 246,104 Z" fill="#ffffff" />
+    <!-- Crystal Clear SMR Vector Emblem -->
+    <svg viewBox="0 0 100 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Outer Hexagon Frame -->
+      <polygon points="50,3 96,25 96,65 50,87 4,65 4,25" stroke="#ffffff" stroke-width="2.2" fill="#000000" />
+      <!-- Letter S -->
+      <path d="M 33,26 L 16,26 L 16,36 L 27,38 L 27,47 L 33,47 L 33,63 L 13,63 L 13,54 L 21,54 L 21,46 L 11,44 L 11,20 L 33,20 Z" fill="#ffffff" />
+      <!-- Letter M -->
+      <path d="M 38,15 L 45,15 L 50,38 L 55,15 L 62,15 L 62,75 L 56,75 L 56,33 L 52,52 L 48,52 L 44,33 L 44,75 L 38,75 Z" fill="#ffffff" />
+      <!-- Letter R -->
+      <path d="M 67,26 L 85,26 C 89,26 91,29 91,34 C 91,39 88,42 84,43 L 89,63 L 82,63 L 78,45 L 73,45 L 73,63 L 67,63 Z M 73,33 L 73,39 L 83,39 C 84.5,39 85.5,38 85.5,36 C 85.5,34 84.5,33 83,33 Z" fill="#ffffff" />
     </svg>
   </a>
   <ul>
@@ -669,11 +659,11 @@
 
 <hr class="divider">
 
-<!-- 01: TECH STACK & SKILLS (PLACED IMMEDIATELY AFTER HERO) -->
+<!-- 01: TECH STACK & SKILLS (Directly Follows Hero) -->
 <section id="skills">
   <div class="section-header">
     <span class="section-label">01</span>
-    <h2 class="section-title">TECH STACK &amp; SKILLS</h2>
+    <h2 class="section-title">SKILLS.conf</h2>
     <div class="section-line"></div>
   </div>
 
@@ -752,7 +742,7 @@
 
 <hr class="divider">
 
-<!-- 02: ABOUT ME -->
+<!-- 02: ABOUT -->
 <section id="about">
   <div class="section-header">
     <span class="section-label">02</span>
@@ -761,7 +751,7 @@
   </div>
   <div class="about-grid">
     <div class="about-text">
-      <p>I'm a <strong>Computer Science student</strong> at the University of Calgary with a strong focus on cybersecurity, defensive tooling, and modern software architectures.</p>
+      <p>I'm an Honours <strong>Computer Science student</strong> at the University of Calgary specializing in Information Security, with a strong focus on defensive tooling, applied cryptography, and robust software architectures.</p>
       <p>Currently serving as <strong>Jr. VP of Academic</strong> at The Cybersecurity Club - UCalgary and <strong>Jr. VP of Events</strong> at Tech Start UCalgary, I actively coordinate tech initiatives and competitions across campus.</p>
       <p>Beyond academics, I volunteer as a <strong>Mathematics Tutor</strong> at YMCA Canada, helping students develop robust analytical and logical foundations.</p>
     </div>
@@ -776,7 +766,7 @@
       </div>
       <div class="stat-card">
         <div class="stat-val">BSc</div>
-        <div class="stat-label">Computer Sci</div>
+        <div class="stat-label">CS (Honours)</div>
       </div>
       <div class="stat-card">
         <div class="stat-val">∞</div>
@@ -922,9 +912,9 @@
   <div class="edu-grid">
     <div class="edu-card">
       <div class="edu-school">University of Calgary</div>
-      <div class="edu-degree">BSc — Computer Science</div>
+      <div class="edu-degree">BSc (Honours) — Computer Science</div>
       <div class="edu-date">Jul 2024 – Apr 2028 · Calgary, AB, Canada</div>
-      <div class="edu-grade">Skills: Python · Java · C · Business Analytics · Critical Thinking</div>
+      <div class="edu-grade">Concentration: Information Security · Skills: Python · Java · C · Linux</div>
     </div>
 
     <div class="edu-card">
@@ -1024,7 +1014,7 @@ function drawMatrix() {
 }
 setInterval(drawMatrix, 45);
 
-// TERMINAL
+// TERMINAL LOGIC
 const terminalLines = [
   { type: 'cmd', prompt: 'sneegha@ucalgary:~$', text: ' whoami' },
   { type: 'out', cls: '', text: 'Sneegha Mohanakrishnan Rekha' },
