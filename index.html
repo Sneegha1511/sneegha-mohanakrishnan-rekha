@@ -587,39 +587,6 @@
   .cat-ides .skill-badge { border-color: rgba(46, 160, 67, 0.45); color: #56d364; }
   .cat-ides .skill-badge:hover { border-color: #39d353; background: rgba(46, 160, 67, 0.22); box-shadow: 0 0 14px rgba(57, 211, 83, 0.35); transform: translateY(-2px); }
 
-  /* EXPERIENCE TIMELINE */
-  .timeline { position: relative; padding-left: 30px; }
-  .timeline::before {
-    content: '';
-    position: absolute;
-    left: 0; top: 0; bottom: 0;
-    width: 1px;
-    background: linear-gradient(to bottom, var(--green), transparent);
-  }
-
-  .timeline-item {
-    position: relative;
-    margin-bottom: 40px;
-    padding: 24px;
-    background: rgba(0,170,255,0.025);
-    border: 1px solid rgba(0,170,255,0.12);
-    border-radius: 2px;
-  }
-
-  .timeline-item::before {
-    content: '▶';
-    position: absolute;
-    left: -37px; top: 24px;
-    color: var(--green);
-    font-size: 0.7rem;
-    text-shadow: 0 0 6px var(--green-glow);
-  }
-
-  .timeline-role { font-family: 'Orbitron', monospace; font-size: 0.95rem; color: var(--white); font-weight: 700; margin-bottom: 4px; }
-  .timeline-company { color: var(--green); font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 4px; }
-  .timeline-date { color: var(--grey); font-size: 0.72rem; letter-spacing: 2px; margin-bottom: 12px; }
-  .timeline-desc { color: var(--grey); font-size: 0.85rem; line-height: 1.8; }
-
   /* PROJECTS & RESEARCH CARDS */
   .cards-grid {
     display: grid;
@@ -770,7 +737,6 @@
   <ul>
     <li><a href="#skills">Skills</a></li>
     <li><a href="#about">About</a></li>
-    <li><a href="#experience">Experience</a></li>
     <li><a href="#projects">Projects</a></li>
     <li><a href="#research">Research</a></li>
     <li><a href="#education">Education</a></li>
@@ -955,38 +921,6 @@
       <p>
         Besides academics, I volunteer as a <strong>Mathematics Tutor</strong> at YMCA Canada, mentoring high school grade 10 and 11 students in algebra and calculus. I support their learning by creating custom lecture notes, small quizzes, assignment walkthroughs, and exam preparation resources.
       </p>
-    </div>
-  </div>
-</section>
-
-<hr class="divider">
-
-<section id="experience">
-  <div class="section-header">
-    <h2 class="section-title">EXPERIENCE.log</h2>
-    <div class="section-line"></div>
-  </div>
-
-  <div class="timeline">
-    <div class="timeline-item">
-      <div class="timeline-role">Jr. VP of Academic</div>
-      <div class="timeline-company">The Cybersecurity Club — UCalgary</div>
-      <div class="timeline-date">Oct 2025 – Present · Calgary, Alberta, Canada</div>
-      <div class="timeline-desc">Leading academic workshops, CTF training sessions, and technical resources for club members. Co-hosted Magpie CTF, orchestrating challenge design and behind-the-scenes competition infrastructure.</div>
-    </div>
-
-    <div class="timeline-item">
-      <div class="timeline-role">Jr. VP of Events</div>
-      <div class="timeline-company">Tech Start UCalgary</div>
-      <div class="timeline-date">Aug 2025 – Present · Calgary, Alberta, Canada</div>
-      <div class="timeline-desc">Organizing tech gatherings, industry networking events, and software showcases for student project teams and startup founders.</div>
-    </div>
-
-    <div class="timeline-item">
-      <div class="timeline-role">Mathematics Tutor</div>
-      <div class="timeline-company">YMCA Canada · Volunteering</div>
-      <div class="timeline-date">Jun 2023 – Present · 2 yrs+</div>
-      <div class="timeline-desc">Mentoring high school and middle school students in algebra, calculus, and foundational logic to instill strong analytical skills.</div>
     </div>
   </div>
 </section>
