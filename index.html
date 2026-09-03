@@ -288,7 +288,7 @@
     margin-left: 2px;
   }
 
-  /* CYBER WINDOW HUD */
+  /* CYBER WINDOW HUD (FULL WIDTH SINGLE VIEW) */
   .hero-right {
     display: flex;
     justify-content: center;
@@ -299,19 +299,19 @@
 
   .cyber-window-frame {
     width: 100%;
-    max-width: 480px;
-    background: rgba(0, 4, 12, 0.92);
+    max-width: 420px;
+    background: rgba(0, 4, 12, 0.94);
     border: 1px solid rgba(0, 170, 255, 0.35);
     border-radius: 8px;
     overflow: hidden;
-    box-shadow: 0 0 35px rgba(0, 170, 255, 0.15), 0 0 70px rgba(204, 0, 255, 0.08);
+    box-shadow: 0 0 35px rgba(0, 170, 255, 0.18), 0 0 70px rgba(204, 0, 255, 0.1);
   }
 
   .window-topbar {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 10px 16px;
+    padding: 12px 18px;
     background: rgba(0, 15, 30, 0.95);
     border-bottom: 1px solid rgba(0, 170, 255, 0.25);
   }
@@ -323,15 +323,12 @@
   .window-dots span:nth-child(3) { background: #2ed573; }
 
   .window-path {
-    font-size: 0.7rem;
+    font-size: 0.72rem;
     color: var(--grey);
     letter-spacing: 2px;
   }
 
   .cyber-hud-body {
-    display: grid;
-    grid-template-columns: 1fr 130px;
-    gap: 16px;
     padding: 16px;
     background: rgba(0, 5, 15, 0.6);
   }
@@ -339,11 +336,14 @@
   .crypto-portrait-box {
     position: relative;
     width: 100%;
-    height: 330px;
+    height: 440px;
     border: 1px solid rgba(0, 170, 255, 0.4);
     border-radius: 4px;
     overflow: hidden;
     background: #000;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-user-drag: none;
   }
 
   .crypto-photo-art {
@@ -352,8 +352,10 @@
     width: 100%; height: 100%;
     object-fit: cover;
     object-position: center top;
-    filter: contrast(1.25) brightness(0.9) saturate(0.85);
+    filter: contrast(1.15) brightness(0.92) saturate(0.9);
     z-index: 1;
+    pointer-events: none;
+    -webkit-user-drag: none;
   }
 
   #photo-matrix-overlay {
@@ -368,64 +370,28 @@
   .crypto-scan-line {
     position: absolute;
     top: 0; left: 0; right: 0;
-    height: 2px;
+    height: 3px;
     background: linear-gradient(to right, transparent, #00ffff, #ffffff, #ff2d8a, transparent);
-    box-shadow: 0 0 10px #00ffff;
+    box-shadow: 0 0 14px #00ffff, 0 0 20px rgba(0, 255, 255, 0.8);
     z-index: 4;
     pointer-events: none;
-    animation: laserScan 3.2s infinite ease-in-out;
+    animation: laserScanFast 1.8s infinite linear;
   }
 
-  @keyframes laserScan {
+  @keyframes laserScanFast {
     0% { top: 0%; opacity: 0; }
-    10% { opacity: 1; }
-    90% { opacity: 1; }
-    100% { top: 98%; opacity: 0; }
-  }
-
-  .hud-sidebar-specs {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    font-size: 0.65rem;
-    line-height: 1.4;
-    border-left: 1px dashed rgba(0, 170, 255, 0.25);
-    padding-left: 12px;
-  }
-
-  .spec-entry {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-  }
-
-  .spec-k {
-    color: var(--grey);
-    letter-spacing: 1.5px;
-    font-size: 0.58rem;
-  }
-
-  .spec-v {
-    color: #e0f0ff;
-    font-family: 'Share Tech Mono', monospace;
-    word-break: break-all;
-  }
-
-  .spec-v.highlight { color: #00aaff; }
-  .spec-v.ok { color: #2ed573; }
-  .spec-v.stream-code {
-    color: var(--cyan);
-    font-family: 'VT323', monospace;
-    font-size: 0.85rem;
+    15% { opacity: 1; }
+    85% { opacity: 1; }
+    100% { top: 99%; opacity: 0; }
   }
 
   .hud-footer-bar {
     display: flex;
     justify-content: space-between;
-    padding: 8px 16px;
+    padding: 10px 18px;
     background: rgba(0, 10, 25, 0.95);
     border-top: 1px solid rgba(0, 170, 255, 0.2);
-    font-size: 0.62rem;
+    font-size: 0.65rem;
     color: var(--grey);
     letter-spacing: 2px;
   }
@@ -724,10 +690,10 @@
       order: -1;
     }
     .cyber-window-frame {
-      max-width: 400px;
+      max-width: 360px;
     }
     .crypto-portrait-box {
-      height: 300px;
+      height: 380px;
     }
   }
 
@@ -780,7 +746,7 @@
     </div>
   </div>
 
-  <!-- RIGHT COLUMN: CRYPTO PORTRAIT HUD -->
+  <!-- RIGHT COLUMN: HIGH-SPEED CRYPTO PORTRAIT HUD -->
   <div class="hero-right">
     <div class="cyber-window-frame">
       <div class="window-topbar">
@@ -791,43 +757,16 @@
       </div>
 
       <div class="cyber-hud-body">
-        <div class="crypto-portrait-box">
+        <div class="crypto-portrait-box" oncontextmenu="return false;">
           <div class="crypto-scan-line"></div>
-          <img src="profile.png" alt="Sneegha" class="crypto-photo-art" />
+          <img src="profile.png" alt="Sneegha" class="crypto-photo-art" ondragstart="return false;" />
           <canvas id="photo-matrix-overlay"></canvas>
-        </div>
-
-        <div class="hud-sidebar-specs">
-          <div class="spec-entry">
-            <span class="spec-k">SUBJECT:</span>
-            <span class="spec-v">Sneegha M. Rekha</span>
-          </div>
-          <div class="spec-entry">
-            <span class="spec-k">ROLE:</span>
-            <span class="spec-v highlight">InfoSec // CS Hons</span>
-          </div>
-          <div class="spec-entry">
-            <span class="spec-k">STATUS:</span>
-            <span class="spec-v ok">ONLINE 🟢</span>
-          </div>
-          <div class="spec-entry">
-            <span class="spec-k">CIPHER:</span>
-            <span class="spec-v">AES-256-GCM</span>
-          </div>
-          <div class="spec-entry">
-            <span class="spec-k">KEY_STREAM:</span>
-            <span class="spec-v stream-code" id="hud-live-key">0x7F2A...9C</span>
-          </div>
-          <div class="spec-entry">
-            <span class="spec-k">HASH:</span>
-            <span class="spec-v stream-code" id="hud-live-hash">SHA-256 [OK]</span>
-          </div>
         </div>
       </div>
 
       <div class="hud-footer-bar">
         <span>SECURITY PROTOCOL: ACTIVE</span>
-        <span id="hud-entropy">ENTROPY: 99.82%</span>
+        <span id="hud-entropy">ENTROPY: 99.98%</span>
       </div>
     </div>
   </div>
@@ -1236,7 +1175,7 @@ function typeTerminal() {
 }
 setTimeout(typeTerminal, 1000);
 
-// RUNNING CRYPTO NUMBER OVERLAY DIRECTLY ON PORTRAIT
+// ULTRA-FAST ANTI-SCREENSHOT CRYPTO OVERLAY (60 FPS)
 const photoCanvas = document.getElementById('photo-matrix-overlay');
 const photoCtx = photoCanvas.getContext('2d');
 
@@ -1248,48 +1187,43 @@ function resizePhotoCanvas() {
 resizePhotoCanvas();
 window.addEventListener('resize', resizePhotoCanvas);
 
-const cryptoGlyphs = '0123456789ABCDEF01<>{}#+=*λπ';
+const cryptoGlyphs = '0123456789ABCDEF01<>{}#+=*λπ$%&@!';
 const glyphArray = cryptoGlyphs.split('');
-const pFontSize = 11;
+const pFontSize = 12;
 let pCols = Math.floor(photoCanvas.width / pFontSize);
-let pDrops = Array(pCols).fill(1).map(() => Math.random() * -40);
-const cyberColors = ['#00aaff', '#00ffea', '#b847ff', '#ff2d8a', '#ff70a6'];
+let pDrops = Array(pCols).fill(1).map(() => Math.random() * -60);
+const cyberColors = ['#00aaff', '#00ffea', '#b847ff', '#ff2d8a', '#ff70a6', '#ffffff'];
 
-function drawPhotoMatrix() {
-  photoCtx.fillStyle = 'rgba(0, 0, 0, 0.12)';
+function drawFastPhotoMatrix() {
+  // Ultra-thin decay to maintain heavy overlapping numbers across frames
+  photoCtx.fillStyle = 'rgba(0, 0, 0, 0.08)';
   photoCtx.fillRect(0, 0, photoCanvas.width, photoCanvas.height);
 
   for (let i = 0; i < pDrops.length; i++) {
+    // Pick random glyphs each frame to prevent freeze-capturing legible features
     const text = glyphArray[Math.floor(Math.random() * glyphArray.length)];
     const x = i * pFontSize;
     const y = pDrops[i] * pFontSize;
 
     photoCtx.fillStyle = cyberColors[Math.floor(Math.random() * cyberColors.length)];
-    photoCtx.font = `${pFontSize}px 'Share Tech Mono', monospace`;
+    photoCtx.font = `bold ${pFontSize}px 'Share Tech Mono', monospace`;
     photoCtx.fillText(text, x, y);
 
-    if (y > photoCanvas.height && Math.random() > 0.96) {
+    // High velocity step (moves 3-5x faster down screen)
+    if (y > photoCanvas.height && Math.random() > 0.94) {
       pDrops[i] = 0;
     }
-    pDrops[i]++;
+    pDrops[i] += 2.2;
   }
 }
-setInterval(drawPhotoMatrix, 50);
+// 16ms interval (~60 FPS) ensures continuous shifting optical noise
+setInterval(drawFastPhotoMatrix, 16);
 
-// STREAMING DYNAMIC HUD STRINGS
+// Entropic live ticker
 setInterval(() => {
-  const keyEl = document.getElementById('hud-live-key');
-  const hashEl = document.getElementById('hud-live-hash');
   const entropyEl = document.getElementById('hud-entropy');
-
-  const hexBytes = ['0x4F', '0x7E', '0x1A', '0xBC', '0x99', '0xD2'];
-  const randByte = hexBytes[Math.floor(Math.random() * hexBytes.length)];
-  const randKey = `${randByte}...${Math.floor(Math.random() * 99)}`;
-  
-  if (keyEl) keyEl.textContent = randKey;
-  if (hashEl) hashEl.textContent = `0x${Math.floor(Math.random() * 0xFFFFFF).toString(16).toUpperCase()}`;
-  if (entropyEl) entropyEl.textContent = `ENTROPY: ${(99 + Math.random() * 0.9).toFixed(2)}%`;
-}, 220);
+  if (entropyEl) entropyEl.textContent = `ENTROPY: ${(99.8 + Math.random() * 0.19).toFixed(2)}%`;
+}, 180);
 
 function handleSubmit(e) {
   e.preventDefault();
