@@ -288,7 +288,7 @@
     margin-left: 2px;
   }
 
-  /* CRYPTOGRAPHIC PROFILE HUD (HERO RIGHT) */
+  /* CYBER WINDOW HUD */
   .hero-right {
     display: flex;
     justify-content: center;
@@ -297,127 +297,138 @@
     animation: fadeInUp 0.9s 0.6s forwards;
   }
 
-  .crypto-card-container {
-    position: relative;
+  .cyber-window-frame {
     width: 100%;
-    max-width: 360px;
-    background: rgba(0, 8, 20, 0.85);
-    border: 1px solid rgba(0, 170, 255, 0.3);
-    border-radius: 6px;
-    padding: 16px;
-    box-shadow: 0 0 30px rgba(0, 170, 255, 0.15), inset 0 0 25px rgba(0, 0, 0, 0.8);
+    max-width: 480px;
+    background: rgba(0, 4, 12, 0.92);
+    border: 1px solid rgba(0, 170, 255, 0.35);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 0 35px rgba(0, 170, 255, 0.15), 0 0 70px rgba(204, 0, 255, 0.08);
   }
 
-  /* Target Reticle Brackets */
-  .bracket-tl, .bracket-tr, .bracket-bl, .bracket-br {
-    position: absolute;
-    width: 14px;
-    height: 14px;
-    border-color: var(--green);
-    pointer-events: none;
-  }
-  .bracket-tl { top: -2px; left: -2px; border-top: 2px solid; border-left: 2px solid; }
-  .bracket-tr { top: -2px; right: -2px; border-top: 2px solid; border-right: 2px solid; }
-  .bracket-bl { bottom: -2px; left: -2px; border-bottom: 2px solid; border-left: 2px solid; }
-  .bracket-br { bottom: -2px; right: -2px; border-bottom: 2px solid; border-right: 2px solid; }
-
-  .crypto-hud-header {
+  .window-topbar {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    font-size: 0.65rem;
+    justify-content: space-between;
+    padding: 10px 16px;
+    background: rgba(0, 15, 30, 0.95);
+    border-bottom: 1px solid rgba(0, 170, 255, 0.25);
+  }
+
+  .window-dots { display: flex; gap: 6px; }
+  .window-dots span { width: 9px; height: 9px; border-radius: 50%; }
+  .window-dots span:nth-child(1) { background: #ff4757; }
+  .window-dots span:nth-child(2) { background: #ffa502; }
+  .window-dots span:nth-child(3) { background: #2ed573; }
+
+  .window-path {
+    font-size: 0.7rem;
+    color: var(--grey);
     letter-spacing: 2px;
-    color: var(--cyan);
-    margin-bottom: 12px;
-    text-transform: uppercase;
   }
 
-  .crypto-pulse-dot {
-    display: inline-block;
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-    background: #00ffaa;
-    box-shadow: 0 0 8px #00ffaa;
-    margin-right: 5px;
-    animation: blink 1.2s infinite;
+  .cyber-hud-body {
+    display: grid;
+    grid-template-columns: 1fr 130px;
+    gap: 16px;
+    padding: 16px;
+    background: rgba(0, 5, 15, 0.6);
   }
 
-  .crypto-img-frame {
+  .crypto-portrait-box {
     position: relative;
     width: 100%;
-    height: 380px;
+    height: 330px;
     border: 1px solid rgba(0, 170, 255, 0.4);
     border-radius: 4px;
     overflow: hidden;
-    background: #00050d;
+    background: #000;
   }
 
-  .crypto-photo {
-    width: 100%;
-    height: 100%;
+  .crypto-photo-art {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
     object-fit: cover;
     object-position: center top;
-    filter: contrast(1.08) brightness(0.95) hue-rotate(185deg) saturate(0.85);
-    transition: filter 0.3s ease;
+    filter: contrast(1.25) brightness(0.9) saturate(0.85);
+    z-index: 1;
   }
 
-  .crypto-card-container:hover .crypto-photo {
-    filter: contrast(1.05) brightness(1) saturate(1);
-  }
-
-  /* Scanline Overlay */
-  .crypto-img-frame::before {
-    content: '';
+  #photo-matrix-overlay {
     position: absolute;
-    inset: 0;
-    background: repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(0, 170, 255, 0.12) 3px, rgba(0, 170, 255, 0.12) 6px);
-    pointer-events: none;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
     z-index: 2;
+    pointer-events: none;
+    mix-blend-mode: screen;
   }
 
-  /* Moving Laser Scanner */
   .crypto-scan-line {
     position: absolute;
     top: 0; left: 0; right: 0;
-    height: 3px;
-    background: linear-gradient(to right, transparent, #00ffff, #ffffff, #00ffff, transparent);
-    box-shadow: 0 0 12px #00ffff, 0 0 20px rgba(0, 255, 255, 0.8);
-    z-index: 3;
+    height: 2px;
+    background: linear-gradient(to right, transparent, #00ffff, #ffffff, #ff2d8a, transparent);
+    box-shadow: 0 0 10px #00ffff;
+    z-index: 4;
     pointer-events: none;
-    animation: laserScan 3.5s infinite ease-in-out;
+    animation: laserScan 3.2s infinite ease-in-out;
   }
 
   @keyframes laserScan {
     0% { top: 0%; opacity: 0; }
     10% { opacity: 1; }
     90% { opacity: 1; }
-    100% { top: 99%; opacity: 0; }
+    100% { top: 98%; opacity: 0; }
   }
 
-  /* Running Cryptographic Data Stream */
-  .crypto-stream-box {
-    margin-top: 14px;
-    background: rgba(0, 3, 10, 0.95);
-    border: 1px solid rgba(0, 170, 255, 0.2);
-    border-radius: 3px;
-    padding: 8px 12px;
+  .hud-sidebar-specs {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    font-size: 0.65rem;
+    line-height: 1.4;
+    border-left: 1px dashed rgba(0, 170, 255, 0.25);
+    padding-left: 12px;
+  }
+
+  .spec-entry {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .spec-k {
+    color: var(--grey);
+    letter-spacing: 1.5px;
+    font-size: 0.58rem;
+  }
+
+  .spec-v {
+    color: #e0f0ff;
     font-family: 'Share Tech Mono', monospace;
-    font-size: 0.68rem;
-    line-height: 1.5;
-    color: var(--green);
-    overflow: hidden;
+    word-break: break-all;
   }
 
-  .crypto-row-data {
+  .spec-v.highlight { color: #00aaff; }
+  .spec-v.ok { color: #2ed573; }
+  .spec-v.stream-code {
+    color: var(--cyan);
+    font-family: 'VT323', monospace;
+    font-size: 0.85rem;
+  }
+
+  .hud-footer-bar {
     display: flex;
     justify-content: space-between;
-    white-space: nowrap;
-    overflow: hidden;
+    padding: 8px 16px;
+    background: rgba(0, 10, 25, 0.95);
+    border-top: 1px solid rgba(0, 170, 255, 0.2);
+    font-size: 0.62rem;
+    color: var(--grey);
+    letter-spacing: 2px;
   }
-
-  .crypto-row-data span:first-child { color: var(--grey); }
-  .crypto-row-data span:last-child { color: var(--cyan); letter-spacing: 1px; }
 
   /* SECTIONS */
   section {
@@ -710,13 +721,13 @@
       gap: 40px;
     }
     .hero-right {
-      order: -1; /* Display identity visual above terminal on smaller viewports */
+      order: -1;
     }
-    .crypto-card-container {
-      max-width: 320px;
+    .cyber-window-frame {
+      max-width: 400px;
     }
-    .crypto-img-frame {
-      height: 330px;
+    .crypto-portrait-box {
+      height: 300px;
     }
   }
 
@@ -747,7 +758,7 @@
   </ul>
 </nav>
 
-<!-- HERO (TWO COLUMN GRID) -->
+<!-- HERO -->
 <div id="hero">
   <!-- LEFT COLUMN: TITLE & TERMINAL -->
   <div class="hero-left">
@@ -769,39 +780,54 @@
     </div>
   </div>
 
-  <!-- RIGHT COLUMN: CRYPTOGRAPHIC BIOMETRIC IDENTITY HUD -->
+  <!-- RIGHT COLUMN: CRYPTO PORTRAIT HUD -->
   <div class="hero-right">
-    <div class="crypto-card-container">
-      <div class="bracket-tl"></div>
-      <div class="bracket-tr"></div>
-      <div class="bracket-bl"></div>
-      <div class="bracket-br"></div>
-
-      <div class="crypto-hud-header">
-        <span><span class="crypto-pulse-dot"></span>BIOMETRIC_RECON.sh</span>
-        <span id="recon-coords">LOC: 51.07°N, 114.13°W</span>
+    <div class="cyber-window-frame">
+      <div class="window-topbar">
+        <div class="window-dots">
+          <span></span><span></span><span></span>
+        </div>
+        <span class="window-path">sneegha // identity.enc</span>
       </div>
 
-      <div class="crypto-img-frame">
-        <div class="crypto-scan-line"></div>
-        <!-- Load your photo (placed in same repo as profile.png) -->
-        <img src="profile.png" alt="Sneegha - Cyber Recon" class="crypto-photo" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=800&q=80';" />
+      <div class="cyber-hud-body">
+        <div class="crypto-portrait-box">
+          <div class="crypto-scan-line"></div>
+          <img src="profile.png" alt="Sneegha" class="crypto-photo-art" />
+          <canvas id="photo-matrix-overlay"></canvas>
+        </div>
+
+        <div class="hud-sidebar-specs">
+          <div class="spec-entry">
+            <span class="spec-k">SUBJECT:</span>
+            <span class="spec-v">Sneegha M. Rekha</span>
+          </div>
+          <div class="spec-entry">
+            <span class="spec-k">ROLE:</span>
+            <span class="spec-v highlight">InfoSec // CS Hons</span>
+          </div>
+          <div class="spec-entry">
+            <span class="spec-k">STATUS:</span>
+            <span class="spec-v ok">ONLINE 🟢</span>
+          </div>
+          <div class="spec-entry">
+            <span class="spec-k">CIPHER:</span>
+            <span class="spec-v">AES-256-GCM</span>
+          </div>
+          <div class="spec-entry">
+            <span class="spec-k">KEY_STREAM:</span>
+            <span class="spec-v stream-code" id="hud-live-key">0x7F2A...9C</span>
+          </div>
+          <div class="spec-entry">
+            <span class="spec-k">HASH:</span>
+            <span class="spec-v stream-code" id="hud-live-hash">SHA-256 [OK]</span>
+          </div>
+        </div>
       </div>
 
-      <!-- Live Streaming Hex/Matrix Numbers -->
-      <div class="crypto-stream-box">
-        <div class="crypto-row-data">
-          <span>SHA-256:</span>
-          <span id="crypto-hash-stream">7f83b165...e9b1</span>
-        </div>
-        <div class="crypto-row-data">
-          <span>SEC_KEY:</span>
-          <span id="crypto-num-stream">0xDEAD // 10101100</span>
-        </div>
-        <div class="crypto-row-data">
-          <span>CIPHER:</span>
-          <span style="color:#00ffaa;">AES-256-GCM [ACTIVE]</span>
-        </div>
+      <div class="hud-footer-bar">
+        <span>SECURITY PROTOCOL: ACTIVE</span>
+        <span id="hud-entropy">ENTROPY: 99.82%</span>
       </div>
     </div>
   </div>
@@ -1119,7 +1145,7 @@
 </footer>
 
 <script>
-// Matrix rain animation
+// Background Matrix Rain
 const canvas = document.getElementById('matrix-canvas');
 const ctx = canvas.getContext('2d');
 
@@ -1157,7 +1183,7 @@ function drawMatrix() {
 }
 setInterval(drawMatrix, 45);
 
-// TERMINAL LOGIC
+// Terminal Typist
 const terminalLines = [
   { type: 'cmd', prompt: 'sneegha@ucalgary:~$', text: ' whoami' },
   { type: 'out', cls: '', text: 'Sneegha Mohanakrishnan Rekha' },
@@ -1210,23 +1236,60 @@ function typeTerminal() {
 }
 setTimeout(typeTerminal, 1000);
 
-// RUNNING CRYPTO DATA HUD ENGINE
-function updateCryptoHUD() {
-  const hashEl = document.getElementById('crypto-hash-stream');
-  const numEl = document.getElementById('crypto-num-stream');
+// RUNNING CRYPTO NUMBER OVERLAY DIRECTLY ON PORTRAIT
+const photoCanvas = document.getElementById('photo-matrix-overlay');
+const photoCtx = photoCanvas.getContext('2d');
 
-  const hexChars = '0123456789abcdef';
-  let randHash = '';
-  for(let i = 0; i < 8; i++) randHash += hexChars[Math.floor(Math.random() * 16)];
-  randHash += '...' + hexChars[Math.floor(Math.random() * 16)] + hexChars[Math.floor(Math.random() * 16)];
-
-  const binary = Math.floor(Math.random() * 255).toString(2).padStart(8, '0');
-  const hexAddress = '0x' + Math.floor(Math.random() * 0xFFFF).toString(16).toUpperCase().padStart(4, '0');
-
-  if (hashEl) hashEl.textContent = randHash;
-  if (numEl) numEl.textContent = `${hexAddress} // ${binary}`;
+function resizePhotoCanvas() {
+  const rect = photoCanvas.getBoundingClientRect();
+  photoCanvas.width = rect.width;
+  photoCanvas.height = rect.height;
 }
-setInterval(updateCryptoHUD, 140);
+resizePhotoCanvas();
+window.addEventListener('resize', resizePhotoCanvas);
+
+const cryptoGlyphs = '0123456789ABCDEF01<>{}#+=*λπ';
+const glyphArray = cryptoGlyphs.split('');
+const pFontSize = 11;
+let pCols = Math.floor(photoCanvas.width / pFontSize);
+let pDrops = Array(pCols).fill(1).map(() => Math.random() * -40);
+const cyberColors = ['#00aaff', '#00ffea', '#b847ff', '#ff2d8a', '#ff70a6'];
+
+function drawPhotoMatrix() {
+  photoCtx.fillStyle = 'rgba(0, 0, 0, 0.12)';
+  photoCtx.fillRect(0, 0, photoCanvas.width, photoCanvas.height);
+
+  for (let i = 0; i < pDrops.length; i++) {
+    const text = glyphArray[Math.floor(Math.random() * glyphArray.length)];
+    const x = i * pFontSize;
+    const y = pDrops[i] * pFontSize;
+
+    photoCtx.fillStyle = cyberColors[Math.floor(Math.random() * cyberColors.length)];
+    photoCtx.font = `${pFontSize}px 'Share Tech Mono', monospace`;
+    photoCtx.fillText(text, x, y);
+
+    if (y > photoCanvas.height && Math.random() > 0.96) {
+      pDrops[i] = 0;
+    }
+    pDrops[i]++;
+  }
+}
+setInterval(drawPhotoMatrix, 50);
+
+// STREAMING DYNAMIC HUD STRINGS
+setInterval(() => {
+  const keyEl = document.getElementById('hud-live-key');
+  const hashEl = document.getElementById('hud-live-hash');
+  const entropyEl = document.getElementById('hud-entropy');
+
+  const hexBytes = ['0x4F', '0x7E', '0x1A', '0xBC', '0x99', '0xD2'];
+  const randByte = hexBytes[Math.floor(Math.random() * hexBytes.length)];
+  const randKey = `${randByte}...${Math.floor(Math.random() * 99)}`;
+  
+  if (keyEl) keyEl.textContent = randKey;
+  if (hashEl) hashEl.textContent = `0x${Math.floor(Math.random() * 0xFFFFFF).toString(16).toUpperCase()}`;
+  if (entropyEl) entropyEl.textContent = `ENTROPY: ${(99 + Math.random() * 0.9).toFixed(2)}%`;
+}, 220);
 
 function handleSubmit(e) {
   e.preventDefault();
