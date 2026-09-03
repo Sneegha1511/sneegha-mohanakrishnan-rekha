@@ -336,7 +336,7 @@
     background: rgba(0, 5, 15, 0.7);
   }
 
-  /* PORTRAIT BOX WITH CRYSTAL CLEAR IMAGE + FINE CODE TRACE */
+  /* PORTRAIT BOX WITH ORIGINAL PHOTO + CODE SCAN */
   .crypto-portrait-box {
     position: relative;
     width: 100%;
@@ -349,7 +349,6 @@
     -webkit-user-select: none;
   }
 
-  /* Clear original photo */
   .crypto-photo-art {
     position: absolute;
     top: 0; left: 0;
@@ -360,7 +359,6 @@
     filter: contrast(1.04) brightness(0.98);
   }
 
-  /* Fine holographic crypto-tracing canvas */
   #ascii-portrait-canvas {
     position: absolute;
     top: 0; left: 0;
@@ -462,6 +460,51 @@
     background: linear-gradient(to right, rgba(0,170,255,0.45), transparent);
   }
 
+  /* ABOUT SECTION TERMINAL CARD */
+  .about-card {
+    max-width: 900px;
+    margin: 0 auto;
+    background: rgba(0, 5, 15, 0.75);
+    border: 1px solid rgba(0, 170, 255, 0.25);
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 0 30px rgba(0, 170, 255, 0.08);
+  }
+
+  .about-card-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 20px;
+    background: rgba(0, 15, 30, 0.85);
+    border-bottom: 1px solid rgba(0, 170, 255, 0.2);
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+  }
+
+  .bar-tag { color: var(--cyan); }
+  .bar-status { color: #00ffaa; }
+
+  .about-body {
+    padding: 32px 36px;
+    color: var(--grey);
+    font-size: 0.95rem;
+    line-height: 2;
+  }
+
+  .about-body p {
+    margin-bottom: 20px;
+  }
+
+  .about-body p:last-child {
+    margin-bottom: 0;
+  }
+
+  .about-body strong {
+    color: var(--green);
+    font-weight: normal;
+  }
+
   /* TECH STACK & SKILLS PANEL */
   .skills-wrapper {
     background: rgba(0, 5, 12, 0.75);
@@ -543,36 +586,6 @@
 
   .cat-ides .skill-badge { border-color: rgba(46, 160, 67, 0.45); color: #56d364; }
   .cat-ides .skill-badge:hover { border-color: #39d353; background: rgba(46, 160, 67, 0.22); box-shadow: 0 0 14px rgba(57, 211, 83, 0.35); transform: translateY(-2px); }
-
-  /* ABOUT */
-  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; }
-  .about-text { color: var(--grey); font-size: 0.9rem; line-height: 2; }
-  .about-text p { margin-bottom: 16px; }
-  .about-text strong { color: var(--green); }
-
-  .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-  .stat-card {
-    background: rgba(0,170,255,0.04);
-    border: 1px solid rgba(0,170,255,0.18);
-    padding: 20px;
-    border-radius: 2px;
-    position: relative;
-  }
-  .stat-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0;
-    width: 3px; height: 100%;
-    background: var(--green);
-  }
-  .stat-val {
-    font-family: 'Orbitron', monospace;
-    font-size: 1.6rem;
-    color: var(--green);
-    font-weight: 700;
-    text-shadow: 0 0 10px var(--green-glow);
-  }
-  .stat-label { font-size: 0.7rem; color: var(--grey); letter-spacing: 2px; text-transform: uppercase; margin-top: 4px; }
 
   /* EXPERIENCE TIMELINE */
   .timeline { position: relative; padding-left: 30px; }
@@ -741,7 +754,9 @@
     nav { padding: 14px 20px; justify-content: center; }
     nav ul { gap: 14px; flex-wrap: wrap; justify-content: center; }
     section { padding: 60px 24px; }
-    .about-grid, .contact-wrapper, .edu-grid { grid-template-columns: 1fr; }
+    .about-card { padding: 0; }
+    .about-body { padding: 24px 20px; }
+    .contact-wrapper, .edu-grid { grid-template-columns: 1fr; }
     .skills-wrapper { padding: 20px 14px; }
     footer { padding: 20px 24px; flex-direction: column; gap: 8px; text-align: center; }
   }
@@ -918,29 +933,24 @@
     <h2 class="section-title">ABOUT_ME.sh</h2>
     <div class="section-line"></div>
   </div>
-  <div class="about-grid">
-    <div class="about-text">
-      <p>I'm an Honours <strong>Computer Science student</strong> at the University of Calgary specializing in Information Security, with a strong focus on defensive tooling, applied cryptography, and robust software architectures.</p>
-      <p>Currently serving as <strong>Jr. VP of Academic</strong> at The Cybersecurity Club - UCalgary and <strong>Jr. VP of Events</strong> at Tech Start UCalgary, I actively coordinate tech initiatives and competitions across campus.</p>
-      <p>Beyond academics, I volunteer as a <strong>Mathematics Tutor</strong> at YMCA Canada, helping students develop robust analytical and logical foundations.</p>
+
+  <div class="about-card">
+    <div class="about-card-bar">
+      <span class="bar-tag">// bio.txt</span>
+      <span class="bar-status">STATUS: VERIFIED</span>
     </div>
-    <div class="stats-grid">
-      <div class="stat-card">
-        <div class="stat-val">2</div>
-        <div class="stat-label">Leadership Roles</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-val">2+</div>
-        <div class="stat-label">Yrs Volunteering</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-val">BSc</div>
-        <div class="stat-label">CS (Honours)</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-val">∞</div>
-        <div class="stat-label">Curiosity</div>
-      </div>
+    <div class="about-body">
+      <p>
+        I'm a third-year <strong>Computer Science (Honours)</strong> student at the University of Calgary, specializing in <strong>Information Security</strong> with a deep interest in the intersection of <strong>Artificial Intelligence and defensive security</strong>.
+      </p>
+      
+      <p>
+        As a <strong>Technical Developer</strong> with <strong>The Cybersecurity Club — UCalgary</strong>, I design hands-on <strong>CTF (Capture The Flag)</strong> challenges, write technical documentation for ongoing projects, and independently experiment with defensive tooling and vulnerability analysis using platforms like <strong>Wireshark</strong>, <strong>Nmap</strong>, and <strong>Splunk</strong>.
+      </p>
+      
+      <p>
+        On the events side, I serve as <strong>Jr. VP of Events</strong> at <strong>Tech Start UCalgary</strong>, where I actively collaborate on organizing tech initiatives, hackathons, and software showcases across campus.
+      </p>
     </div>
   </div>
 </section>
@@ -1243,14 +1253,12 @@ const traceCols = 40;
 let scanLineY = 0;
 
 function drawFineCryptoTracer() {
-  // Gentle dark fade to keep background transparent/clear
   pCtx.fillStyle = 'rgba(0, 5, 15, 0.1)';
   pCtx.fillRect(0, 0, pCanvas.width, pCanvas.height);
 
   const cellW = pCanvas.width / traceCols;
   const cellH = 10;
 
-  // Render 3 consecutive tracing scanlines per cycle
   for (let s = 0; s < 3; s++) {
     const y = (scanLineY + s * cellH) % pCanvas.height;
 
@@ -1259,7 +1267,6 @@ function drawFineCryptoTracer() {
         const char = cryptoChars[Math.floor(Math.random() * cryptoChars.length)];
         const x = c * cellW;
 
-        // Subtle glowing cyber tints matching facial highlights
         pCtx.fillStyle = Math.random() > 0.65 ? '#00ffff' : '#ff2d8a';
         pCtx.font = '600 7px "Share Tech Mono", monospace';
         pCtx.fillText(char, x, y + 8);
