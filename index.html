@@ -128,22 +128,7 @@
     animation: fadeInUp 0.8s 0.3s forwards;
   }
 
-  /* CYCLIC COLOR GLOW: White -> Blue -> Purple/Cyan -> White */
-  @keyframes colorCycleGlow {
-    0%, 100% {
-      color: #ffffff;
-      text-shadow: 0 0 20px rgba(255, 255, 255, 0.85), 0 0 40px rgba(0, 170, 255, 0.4);
-    }
-    33% {
-      color: #aae4ff;
-      text-shadow: 0 0 25px rgba(0, 170, 255, 0.9), 0 0 50px rgba(0, 170, 255, 0.6);
-    }
-    66% {
-      color: #ffd6f0;
-      text-shadow: 0 0 25px rgba(255, 45, 138, 0.85), 0 0 55px rgba(204, 0, 255, 0.6);
-    }
-  }
-
+  /* CYBER CHROMATIC SLICE GLITCH (White -> Multi-layer Offset -> White) */
   .hero-name {
     font-family: 'Orbitron', monospace;
     font-size: clamp(3rem, 7vw, 5.5rem);
@@ -151,18 +136,94 @@
     line-height: 1.1;
     letter-spacing: 3px;
     position: relative;
+    display: inline-block;
+    color: #ffffff;
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.4), 0 0 40px rgba(0, 170, 255, 0.25);
     opacity: 0;
-    animation: fadeInUp 0.8s 0.5s forwards, colorCycleGlow 6s ease-in-out infinite alternate;
+    animation: fadeInUp 0.8s 0.5s forwards;
   }
 
-  .hero-name::before, .hero-name::after {
+  .hero-name::before,
+  .hero-name::after {
     content: attr(data-text);
     position: absolute;
-    top: 0; left: 0;
+    top: 0;
+    left: 0;
     width: 100%;
+    height: 100%;
+    background: transparent;
+    pointer-events: none;
   }
-  .hero-name::before { color: var(--red); animation: glitch 4s 2s infinite; opacity: 0.45; }
-  .hero-name::after { color: var(--cyan); animation: glitch 4s 2.5s infinite; opacity: 0.45; }
+
+  /* Upper/Middle Pink Slice */
+  .hero-name::before {
+    color: #ff72b6;
+    text-shadow: -2px 0 #ff2d8a;
+    animation: glitchPinkSlice 4.5s infinite ease-in-out;
+  }
+
+  /* Lower/Middle Violet-Purple Slice */
+  .hero-name::after {
+    color: #cb5eff;
+    text-shadow: 2px 0 #8e2de2;
+    animation: glitchPurpleSlice 4.5s infinite ease-in-out;
+  }
+
+  @keyframes glitchPinkSlice {
+    0%, 25%, 70%, 100% {
+      opacity: 0;
+      transform: translate(0, 0);
+      clip-path: inset(50% 0 50% 0);
+    }
+    30% {
+      opacity: 0.95;
+      transform: translate(-3px, -1px);
+      clip-path: inset(28% 0 38% 0);
+    }
+    45% {
+      opacity: 0.95;
+      transform: translate(3px, 1px);
+      clip-path: inset(32% 0 35% 0);
+    }
+    55% {
+      opacity: 0.95;
+      transform: translate(-4px, 0);
+      clip-path: inset(25% 0 42% 0);
+    }
+    65% {
+      opacity: 0.95;
+      transform: translate(2px, 0);
+      clip-path: inset(30% 0 40% 0);
+    }
+  }
+
+  @keyframes glitchPurpleSlice {
+    0%, 25%, 70%, 100% {
+      opacity: 0;
+      transform: translate(0, 0);
+      clip-path: inset(50% 0 50% 0);
+    }
+    30% {
+      opacity: 0.95;
+      transform: translate(3px, 1px);
+      clip-path: inset(42% 0 25% 0);
+    }
+    45% {
+      opacity: 0.95;
+      transform: translate(-3px, -1px);
+      clip-path: inset(38% 0 28% 0);
+    }
+    55% {
+      opacity: 0.95;
+      transform: translate(4px, 1px);
+      clip-path: inset(45% 0 22% 0);
+    }
+    65% {
+      opacity: 0.95;
+      transform: translate(-2px, 0);
+      clip-path: inset(40% 0 30% 0);
+    }
+  }
 
   .hero-pronouns {
     font-size: 0.75rem;
@@ -529,13 +590,6 @@
 
   @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
   @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
-  @keyframes glitch {
-    0%, 100% { clip-path: inset(0 0 100% 0); }
-    10% { clip-path: inset(10% 0 60% 0); transform: translate(-3px, 0); }
-    20% { clip-path: inset(40% 0 30% 0); transform: translate(3px, 0); }
-    30% { clip-path: inset(80% 0 5% 0); transform: translate(-2px, 0); }
-    40% { clip-path: inset(0 0 100% 0); }
-  }
 
   .divider { border: none; border-top: 1px solid rgba(0,170,255,0.09); margin: 0; }
 
@@ -559,13 +613,9 @@
   <a class="nav-logo" href="#">
     <!-- SMR Hexagonal Monogram Logo -->
     <svg viewBox="0 0 300 260" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <!-- Outer Hexagon Outline -->
       <polygon points="150,5 290,75 290,185 150,255 10,185 10,75" stroke="#ffffff" stroke-width="8" fill="#000000" />
-      <!-- Letter S -->
       <path d="M 95,85 L 60,85 L 60,118 L 95,124 L 95,175 L 30,175 L 30,150 L 65,150 L 65,138 L 30,132 L 30,85 Z" fill="#ffffff" />
-      <!-- Letter M -->
       <path d="M 115,62 L 140,62 L 150,110 L 160,62 L 185,62 L 185,198 L 165,198 L 165,105 L 150,155 L 135,105 L 135,198 L 115,198 Z" fill="#ffffff" />
-      <!-- Letter R -->
       <path d="M 205,85 L 255,85 C 265,85 270,92 270,105 C 270,118 265,125 255,125 L 230,125 L 230,140 L 270,175 L 245,175 L 210,142 L 205,142 L 205,175 L 185,175 L 185,85 Z M 205,105 L 205,118 L 245,118 C 248,118 250,115 250,111 C 250,107 248,105 245,105 Z" fill="#ffffff" />
     </svg>
   </a>
@@ -955,10 +1005,15 @@ function drawMatrix() {
 }
 setInterval(drawMatrix, 45);
 
-// Terminal line typing
+// TERMINAL
 const terminalLines = [
   { type: 'cmd', prompt: 'sneegha@ucalgary:~$', text: ' whoami' },
-  { type: 'out', cls: '', text: 'Sneegha Mohanakrishnan Rekha — CS Student' },
+  { type: 'out', cls: '', text: 'Sneegha Mohanakrishnan Rekha' },
+  { type: 'out', cls: '', text: '3rd year B.Sc Computer Science (Honours)' },
+  { type: 'out', cls: '', text: 'Concentration: Information Security' },
+  { type: 'cmd', prompt: 'sneegha@ucalgary:~$', text: ' cat roles.txt' },
+  { type: 'out', cls: 'success', text: '[+] Jr. VP Academic — Cybersecurity Club UCalgary' },
+  { type: 'out', cls: 'success', text: '[+] Jr. VP Events — Tech Start UCalgary' },
   { type: 'cmd', prompt: 'sneegha@ucalgary:~$', text: ' ./enable_cybersec_mode.sh' },
   { type: 'out', cls: 'success', text: '[+] Cybersecurity mode ON 🔐' },
   { type: 'cmd', prompt: 'sneegha@ucalgary:~$', text: ' _', cursor: true }
