@@ -728,7 +728,12 @@
   }
 
   /* EDUCATION */
-  .edu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .edu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+  }
+
   .edu-card {
     background: rgba(0,5,15,0.62);
     border: 1px solid rgba(0,170,255,0.18);
@@ -1186,16 +1191,23 @@
   <div class="edu-grid">
     <div class="edu-card">
       <div class="edu-school">University of Calgary</div>
-      <div class="edu-degree">BSc (Honours) — Computer Science</div>
-      <div class="edu-date">Jul 2024 – Apr 2028 · Calgary, AB, Canada</div>
-      <div class="edu-grade">Concentration: Information Security · Skills: Python · Java · C · Linux</div>
+      <div class="edu-degree">B.Sc Computer Science (Honours) — Co-op</div>
+      <div class="edu-date">Sep 2024 – Present · Calgary, AB, Canada</div>
+      <div class="edu-grade">Concentration: Information Security</div>
+    </div>
+
+    <div class="edu-card">
+      <div class="edu-school">Mount Royal University</div>
+      <div class="edu-degree">B.Sc Computer Science</div>
+      <div class="edu-date">Sep 2023 – Jun 2024 · Calgary, AB, Canada</div>
+      <div class="edu-grade">Undergraduate Studies</div>
     </div>
 
     <div class="edu-card">
       <div class="edu-school">James Fowler High School</div>
       <div class="edu-degree">High School Diploma</div>
       <div class="edu-date">Feb 2022 – Jun 2023</div>
-      <div class="edu-grade">Grade: A · Skills: Math AP · Critical Thinking · Microsoft Excel</div>
+      <div class="edu-grade">AP Math</div>
     </div>
   </div>
 </section>
