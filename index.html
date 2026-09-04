@@ -595,7 +595,7 @@
   }
 
   .terminal-card {
-    background: rgba(0, 5, 15, 0.7);
+    background: rgba(0, 5, 15, 0.75);
     border: 1px solid rgba(0, 170, 255, 0.2);
     border-radius: 4px;
     padding: 24px;
@@ -603,24 +603,89 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    box-shadow: 0 0 20px rgba(0, 170, 255, 0.04);
   }
 
   .terminal-card:hover {
     border-color: var(--green);
     transform: translateY(-4px);
-    box-shadow: 0 8px 30px rgba(0, 170, 255, 0.12);
+    box-shadow: 0 8px 30px rgba(0, 170, 255, 0.15);
   }
 
   .card-top { margin-bottom: 16px; }
-  .card-tag { font-size: 0.68rem; color: var(--cyan); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 6px; }
-  .card-title { font-family: 'Orbitron', monospace; font-size: 1.05rem; color: var(--white); font-weight: 700; margin-bottom: 10px; }
-  .card-desc { color: var(--grey); font-size: 0.85rem; line-height: 1.8; margin-bottom: 16px; }
 
-  .terminal-card .card-bottom {
+  .card-header-row {
     display: flex;
-    flex-direction: column;
-    gap: 16px;
-    margin-top: 16px;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 10px;
+  }
+
+  .card-tag { font-size: 0.68rem; color: var(--cyan); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 6px; }
+
+  .repo-btn-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 12px;
+    background: rgba(0, 170, 255, 0.08);
+    border: 1px solid rgba(0, 170, 255, 0.35);
+    border-radius: 3px;
+    color: var(--green);
+    text-decoration: none;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    white-space: nowrap;
+    transition: all 0.2s ease;
+  }
+
+  .repo-btn-link:hover {
+    background: rgba(0, 170, 255, 0.2);
+    border-color: var(--green);
+    box-shadow: 0 0 10px var(--green-glow);
+    color: #ffffff;
+  }
+
+  .card-title {
+    font-family: 'Orbitron', monospace;
+    font-size: 1.05rem;
+    color: var(--white);
+    font-weight: 700;
+    line-height: 1.4;
+  }
+
+  .card-desc {
+    color: var(--grey);
+    font-size: 0.85rem;
+    line-height: 1.8;
+    margin-bottom: 16px;
+  }
+
+  .card-bullets {
+    list-style: none;
+    padding-left: 0;
+    margin-bottom: 18px;
+  }
+
+  .card-bullets li {
+    position: relative;
+    padding-left: 18px;
+    color: var(--grey);
+    font-size: 0.83rem;
+    line-height: 1.75;
+    margin-bottom: 8px;
+  }
+
+  .card-bullets li::before {
+    content: '▶';
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-size: 0.62rem;
+    color: var(--green);
   }
 
   .card-tech { display: flex; flex-wrap: wrap; gap: 8px; }
@@ -631,41 +696,6 @@
     background: rgba(0, 170, 255, 0.08);
     border: 1px solid rgba(0, 170, 255, 0.25);
     color: var(--green);
-  }
-
-  .card-link-btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: space-between;
-    width: fit-content;
-    gap: 8px;
-    padding: 6px 14px;
-    background: rgba(0, 170, 255, 0.06);
-    border: 1px solid rgba(0, 170, 255, 0.35);
-    border-radius: 2px;
-    color: var(--cyan);
-    font-family: 'Share Tech Mono', monospace;
-    font-size: 0.72rem;
-    letter-spacing: 2px;
-    text-decoration: none;
-    transition: all 0.25s ease;
-  }
-
-  .card-link-btn:hover {
-    background: rgba(255, 45, 138, 0.15);
-    border-color: var(--cyan);
-    color: #ffffff;
-    box-shadow: 0 0 12px rgba(255, 45, 138, 0.35);
-    transform: translateY(-2px);
-  }
-
-  .card-link-btn .btn-arrow {
-    font-size: 0.85rem;
-    transition: transform 0.2s ease;
-  }
-
-  .card-link-btn:hover .btn-arrow {
-    transform: translate(2px, -2px);
   }
 
   /* EDUCATION */
@@ -978,69 +1008,73 @@
   <div class="cards-grid">
     <div class="terminal-card">
       <div class="card-top">
-        <div class="card-tag">// NETWORK FORENSICS &amp; THREAT ANALYSIS</div>
-        <div class="card-title">Malware Traffic Analysis &amp; Incident Response Lab</div>
-        <div class="card-desc">
-          Analyzed real-world malicious PCAP traffic using Wireshark to isolate infected hosts, identify malware families, trace attacker footprints, extract actionable IOCs, and reconstruct forensic attack timelines for formal incident reports.
+        <div class="card-tag">// Network Forensics &amp; Incident Response</div>
+        <div class="card-header-row">
+          <div class="card-title">Malware-Traffic-Analysis-and-Incident-Response-Lab</div>
+          <a class="repo-btn-link" href="https://github.com/Sneegha1511/Malware-Traffic-Analysis-and-Incident-Response-Lab" target="_blank" rel="noopener noreferrer">
+            <span>[ REPO ]</span> ↗
+          </a>
         </div>
+        <ul class="card-bullets">
+          <li>Analyzed malicious PCAP traffic using Wireshark to identify infected hosts, trace suspicious network activity, investigate attacker C2 communications, and extract Indicators of Compromise (IOCs).</li>
+          <li>Reconstructed the attack chain and malware behavior through protocol analysis, TCP conversations, targeted filtering, and stream reconstruction, identifying STRRAT v1.6 beaconing, host reconnaissance, and attacker-controlled infrastructure.</li>
+          <li>Developed a NIST SP 800-61–aligned incident report documenting the investigation, attack timeline, affected host, IOCs, C2 activity, and incident severity.</li>
+        </ul>
       </div>
-      <div class="card-bottom">
-        <div class="card-tech">
-          <span class="tech-pill">Wireshark</span>
-          <span class="tech-pill">Network Security</span>
-          <span class="tech-pill">Malware Analysis</span>
-          <span class="tech-pill">Incident Response</span>
-          <span class="tech-pill">Traffic Analysis</span>
-        </div>
-        <a href="https://github.com/Sneegha1511/Malware-Traffic-Analysis-and-Incident-Response-Lab" target="_blank" class="card-link-btn">
-          <span>VIEW REPO</span>
-          <span class="btn-arrow">↗</span>
-        </a>
+      <div class="card-tech">
+        <span class="tech-pill">Wireshark</span>
+        <span class="tech-pill">Network Forensics</span>
+        <span class="tech-pill">Malware Analysis</span>
+        <span class="tech-pill">Network Security</span>
+        <span class="tech-pill">Traffic Analysis</span>
+        <span class="tech-pill">Incident Response</span>
+        <span class="tech-pill">IOC Extraction</span>
+        <span class="tech-pill">NIST SP 800-61</span>
       </div>
     </div>
 
     <div class="terminal-card">
       <div class="card-top">
         <div class="card-tag">// Cybersecurity &amp; AI</div>
-        <div class="card-title">AI Security Proxy</div>
+        <div class="card-header-row">
+          <div class="card-title">AI Security Proxy</div>
+        </div>
         <div class="card-desc">An inline defense proxy for LLM architectures designed to intercept, analyze, and neutralize prompt injection, Chain-of-Thought leakage, and sensitive API credential exposure.</div>
       </div>
-      <div class="card-bottom">
-        <div class="card-tech">
-          <span class="tech-pill">Python</span>
-          <span class="tech-pill">LLM Security</span>
-          <span class="tech-pill">OWASP</span>
-        </div>
+      <div class="card-tech">
+        <span class="tech-pill">Python</span>
+        <span class="tech-pill">LLM Security</span>
+        <span class="tech-pill">OWASP</span>
       </div>
     </div>
 
     <div class="terminal-card">
       <div class="card-top">
         <div class="card-tag">// Network &amp; Systems</div>
-        <div class="card-title">Linux Auth Attack Detection</div>
+        <div class="card-header-row">
+          <div class="card-title">Linux Auth Attack Detection</div>
+        </div>
         <div class="card-desc">Automated log monitor tracking failed authentication bursts, unauthorized privilege escalations, and brute force vectors across Linux systems.</div>
       </div>
-      <div class="card-bottom">
-        <div class="card-tech">
-          <span class="tech-pill">Bash</span>
-          <span class="tech-pill">Linux</span>
-          <span class="tech-pill">Regex</span>
-        </div>
+      <div class="card-tech">
+        <span class="tech-pill">Bash</span>
+        <span class="tech-pill">Linux</span>
+        <span class="tech-pill">Regex</span>
       </div>
     </div>
 
     <div class="terminal-card">
       <div class="card-top">
         <div class="card-tag">// CTF Challenge Design</div>
-        <div class="card-title">SPISE-CTF Suspicious DNS</div>
+        <div class="card-header-row">
+          <div class="card-title">SPISE-CTF Suspicious DNS</div>
+        </div>
         <div class="card-desc">Forensics and packet capture challenge centered around identifying exfiltration payloads disguised inside anomalous DNS queries.</div>
       </div>
-      <div class="card-bottom">
-        <div class="card-tech">
-          <span class="tech-pill">Wireshark</span>
-          <span class="tech-pill">PCAP</span>
-          <span class="tech-pill">Network Security</span>
-        </div>
+      <div class="card-tech">
+        <span class="tech-pill">Wireshark</span>
+        <span class="tech-pill">PCAP</span>
+        <span class="tech-pill">Network Security</span>
       </div>
     </div>
   </div>
@@ -1061,11 +1095,9 @@
         <div class="card-title">Secure Multipath Routing &amp; Adversarial Nodes</div>
         <div class="card-desc">Investigating cryptographic verification and path redundancy models to mitigate probabilistic node corruption in distributed systems.</div>
       </div>
-      <div class="card-bottom">
-        <div class="card-tech">
-          <span class="tech-pill">Routing Protocols</span>
-          <span class="tech-pill">Distributed Networks</span>
-        </div>
+      <div class="card-tech">
+        <span class="tech-pill">Routing Protocols</span>
+        <span class="tech-pill">Distributed Networks</span>
       </div>
     </div>
 
@@ -1075,11 +1107,9 @@
         <div class="card-title">Quantum Key Distribution Architectures</div>
         <div class="card-desc">Analyzing photon-level polarization states and eavesdropping detection mechanisms across emerging post-quantum cryptographic primitives.</div>
       </div>
-      <div class="card-bottom">
-        <div class="card-tech">
-          <span class="tech-pill">Cryptography</span>
-          <span class="tech-pill">QKD</span>
-        </div>
+      <div class="card-tech">
+        <span class="tech-pill">Cryptography</span>
+        <span class="tech-pill">QKD</span>
       </div>
     </div>
   </div>
