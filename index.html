@@ -619,10 +619,18 @@
     justify-content: space-between;
     align-items: flex-start;
     gap: 12px;
-    margin-bottom: 10px;
+    margin-bottom: 4px;
   }
 
   .card-tag { font-size: 0.68rem; color: var(--cyan); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 6px; }
+
+  .card-date {
+    font-size: 0.72rem;
+    color: var(--amber);
+    letter-spacing: 1.5px;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+  }
 
   .repo-btn-link {
     display: inline-flex;
@@ -1015,6 +1023,7 @@
             <span>[ REPO ]</span> ↗
           </a>
         </div>
+        <div class="card-date">// August 2026</div>
         <ul class="card-bullets">
           <li>Analyzed malicious PCAP traffic using Wireshark to identify infected hosts, trace suspicious network activity, investigate attacker C2 communications, and extract Indicators of Compromise (IOCs).</li>
           <li>Reconstructed the attack chain and malware behavior through protocol analysis, TCP conversations, targeted filtering, and stream reconstruction, identifying STRRAT v1.6 beaconing, host reconnaissance, and attacker-controlled infrastructure.</li>
@@ -1042,6 +1051,7 @@
             <span>[ REPO ]</span> ↗
           </a>
         </div>
+        <div class="card-date">// August 2026</div>
         <ul class="card-bullets">
           <li>Built custom Splunk search queries to hunt through Linux authentication logs, tracking a high-volume brute-force campaign and identifying malicious source IPs.</li>
           <li>Traced failed login attempts, uncovered the exact compromised account with persistent unauthorized SSH sessions, and reconstructed the full attack timeline with defensive remediation controls.</li>
@@ -1058,16 +1068,26 @@
 
     <div class="terminal-card">
       <div class="card-top">
-        <div class="card-tag">// Cybersecurity &amp; AI</div>
+        <div class="card-tag">// Generative AI &amp; Agents</div>
         <div class="card-header-row">
-          <div class="card-title">AI Security Proxy</div>
+          <div class="card-title">Product Finder AI Agent</div>
+          <a class="repo-btn-link" href="https://github.com/Sneegha1511/Product_Finder_AI_Agent" target="_blank" rel="noopener noreferrer">
+            <span>[ REPO ]</span> ↗
+          </a>
         </div>
-        <div class="card-desc">An inline defense proxy for LLM architectures designed to intercept, analyze, and neutralize prompt injection, Chain-of-Thought leakage, and sensitive API credential exposure.</div>
+        <div class="card-date">// July 2026</div>
+        <ul class="card-bullets">
+          <li>Developed an AI-powered product recommendation agent using Python, Google ADK, and Gemini 2.0 Flash — implemented 2 custom filtering tools supporting 5 filter types (max, min, exact, category, combined) across a structured JSON dataset, completing the full functional prototype within 4–5 hours through effective time management and multitasking for a technical assignment.</li>
+          <li>Integrated the ADK agent with a Streamlit chatbot interface, implementing tool orchestration, session handling, structured product responses, and product-card display for an end-to-end natural language product search.</li>
+        </ul>
       </div>
       <div class="card-tech">
         <span class="tech-pill">Python</span>
-        <span class="tech-pill">LLM Security</span>
-        <span class="tech-pill">OWASP</span>
+        <span class="tech-pill">Google ADK</span>
+        <span class="tech-pill">Gemini 2.0 Flash</span>
+        <span class="tech-pill">Streamlit</span>
+        <span class="tech-pill">AI Agents</span>
+        <span class="tech-pill">JSON</span>
       </div>
     </div>
 
