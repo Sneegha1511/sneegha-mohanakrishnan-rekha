@@ -1236,17 +1236,20 @@
     </div>
 
     <form class="contact-form" onsubmit="handleSubmit(event)">
+      <input type="hidden" name="access_key" value="537feead-f2d3-4579-8e4c-3d4cb74c" />
+      <input type="hidden" name="subject" value="New Portfolio Transmission from Sneegha's Site" />
+
       <div class="form-group">
         <label class="form-label">Name</label>
-        <input class="form-input" type="text" placeholder="your_name" required />
+        <input class="form-input" type="text" name="name" placeholder="your_name" required />
       </div>
       <div class="form-group">
         <label class="form-label">Email</label>
-        <input class="form-input" type="email" placeholder="you@domain.com" required />
+        <input class="form-input" type="email" name="email" placeholder="you@domain.com" required />
       </div>
       <div class="form-group">
         <label class="form-label">Message</label>
-        <textarea class="form-textarea" placeholder="// Enter your message..." required></textarea>
+        <textarea class="form-textarea" name="message" placeholder="// Enter your message..." required></textarea>
       </div>
       <button class="btn-send" type="submit">TRANSMIT &gt;&gt;</button>
     </form>
@@ -1412,12 +1415,36 @@ setInterval(() => {
   if (entropyEl) entropyEl.textContent = `ENTROPY: ${(99.8 + Math.random() * 0.15).toFixed(2)}%`;
 }, 220);
 
-function handleSubmit(e) {
+async function handleSubmit(e) {
   e.preventDefault();
-  const btn = e.target.querySelector('.btn-send');
-  btn.textContent = '[ MESSAGE TRANSMITTED ]';
+  const form = e.target;
+  const btn = form.querySelector('.btn-send');
+
+  btn.textContent = '[ TRANSMITTING... ]';
   btn.disabled = true;
-  setTimeout(() => { btn.textContent = 'TRANSMIT >>'; btn.disabled = false; e.target.reset(); }, 3000);
+
+  const formData = new FormData(form);
+
+  try {
+    const response = await fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      body: formData
+    });
+
+    if (response.ok) {
+      btn.textContent = '[ MESSAGE TRANSMITTED ]';
+      form.reset();
+    } else {
+      btn.textContent = '[ ERROR: RETRY ]';
+    }
+  } catch (error) {
+    btn.textContent = '[ TRANSMISSION FAILURE ]';
+  } finally {
+    setTimeout(() => {
+      btn.textContent = 'TRANSMIT >>';
+      btn.disabled = false;
+    }, 4000);
+  }
 }
 </script>
 </body>
