@@ -279,6 +279,13 @@
   .output { color: var(--grey); padding-left: 16px; }
   .output.success { color: var(--green); }
 
+  /* GLOWING WHITE CERTIFICATIONS */
+  .output.cert-white {
+    color: #ffffff;
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.85), 0 0 16px rgba(255, 255, 255, 0.45);
+    font-weight: 500;
+  }
+
   .cursor-blink {
     display: inline-block;
     width: 8px; height: 14px;
@@ -1265,6 +1272,8 @@ const terminalLines = [
   { type: 'out', cls: 'success', text: '[+] Jr. VP Events — Tech Start UCalgary' },
   { type: 'cmd', prompt: 'sneegha@ucalgary:~$', text: ' ./enable_cybersec_mode.sh' },
   { type: 'out', cls: 'success', text: '[+] Cybersecurity mode ON 🔐' },
+  { type: 'out', cls: 'cert-white', text: '[★] Google Cybersecurity Professional Certificate | Google Data Analytics' },
+  { type: 'out', cls: 'cert-white', text: '[★] TCPS: CORE-2022 (Course on Research Ethics)' },
   { type: 'cmd', prompt: 'sneegha@ucalgary:~$', text: ' _', cursor: true }
 ];
 
